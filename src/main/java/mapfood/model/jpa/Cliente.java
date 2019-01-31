@@ -13,9 +13,7 @@ public class Cliente {
     @Id
     private Long id;
 
-    private Point latitude;
-
-    private Point longitude;
+    private Point posicao;
 
     public Long getId() {
         return id;
@@ -25,19 +23,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public Point getLatitude() {
-        return latitude;
+    public Point getPosicao() {
+        return posicao;
     }
 
-    public void setLatitude(Point latitude) {
-        this.latitude = latitude;
-    }
-
-    public Point getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Point longitude) {
-        this.longitude = longitude;
+    public void setPosicao(Point posicao) {
+        this.posicao = posicao;
     }
 }
