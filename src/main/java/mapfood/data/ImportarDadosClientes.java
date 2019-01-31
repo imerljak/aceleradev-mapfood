@@ -28,7 +28,6 @@ public class ImportarDadosClientes implements ImportadorDeDados {
 
     @Override
     public void importar() {
-
         if (repository.count() == 0) {
             List<Cliente> clientes = new LeitorDeCsv().lerDados(ClienteDTO.class, "/csv/clientes.csv")
                     .stream()

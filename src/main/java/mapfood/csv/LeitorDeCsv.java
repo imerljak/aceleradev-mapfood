@@ -12,6 +12,9 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Helper para parsing e importação de dados de arquivos CSV.
+ */
 public class LeitorDeCsv {
 
     private Logger logger = LoggerFactory.getLogger(ImportacaoDeDadosCsvConfig.class);
