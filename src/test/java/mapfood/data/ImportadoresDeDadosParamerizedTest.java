@@ -31,6 +31,12 @@ public class ImportadoresDeDadosParamerizedTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+    private final LeitorDeCsv leitorDeCsv;
+    private final ImportadorDeDados importador;
+    private final CrudRepository repository;
+    private final Class<Object> classeDto;
+    private final String caminhoCsv;
+
     @Parameters
     public static Collection<Object[]> parameters() {
         return Arrays.asList(new Object[][]{
@@ -62,17 +68,7 @@ public class ImportadoresDeDadosParamerizedTest {
         });
     }
 
-    private final LeitorDeCsv leitorDeCsv;
-    private final ImportadorDeDados importador;
-    private final CrudRepository repository;
-    private final Class<Object> classeDto;
-    private final String caminhoCsv;
-
-    public ImportadoresDeDadosParamerizedTest(
-            Class<? extends ImportadorDeDados> importadorClass,
-            Class<Object> classeDto,
-            Class<? extends CrudRepository> repositoryClass,
-            String caminhoCsv) {
+    public ImportadoresDeDadosParamerizedTest(Class<? extends ImportadorDeDados> importadorClass, Class<Object> classeDto, Class<? extends CrudRepository> repositoryClass, String caminhoCsv) {
 
         this.repository = Mockito.mock(repositoryClass);
         this.leitorDeCsv = Mockito.mock(LeitorDeCsv.class);
@@ -89,7 +85,8 @@ public class ImportadoresDeDadosParamerizedTest {
                     .getConstructor(repositoryClass, LeitorDeCsv.class)
                     .newInstance(repository, leitorDeCsv);
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
+            // TODO: Definir uma exceção melhor aqui?
+            throw new IllegalStateException(e.getMessage(), e);
         }
     }
 
