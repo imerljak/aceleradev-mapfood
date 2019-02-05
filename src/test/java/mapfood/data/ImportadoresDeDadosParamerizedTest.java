@@ -70,8 +70,8 @@ public class ImportadoresDeDadosParamerizedTest {
 
     public ImportadoresDeDadosParamerizedTest(Class<? extends ImportadorDeDados> importadorClass, Class<Object> classeDto, Class<? extends CrudRepository> repositoryClass, String caminhoCsv) {
 
-        this.repository = Mockito.mock(repositoryClass);
-        this.leitorDeCsv = Mockito.mock(LeitorDeCsv.class);
+        this.repository = mock(repositoryClass);
+        this.leitorDeCsv = mock(LeitorDeCsv.class);
 
         this.importador = buildImportador(importadorClass, repositoryClass);
 
