@@ -7,10 +7,4 @@ public interface ImportadorDeDados {
      */
     void importar();
 
-    /**
-     * Chama o próximo passo a ser efetuado na importação.
-     * Não faz nada caso não precise.
-     */
-    void proximoPasso();
-
 }

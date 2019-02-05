@@ -1,23 +1,12 @@
-package mapfood.model.mongodb;
+package mapfood.model.dto;
 
+public class EstabelecimentoDTO {
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document("estabelecimentos")
-public class Estabelecimento {
-
-    @Id
     private String id;
-
     private String nome;
-
     private String cidade;
-
-    private Double latitude;
-
     private Double longitude;
-
+    private Double latitude;
     private String tipoDeComida;
 
     public String getId() {
@@ -44,20 +33,20 @@ public class Estabelecimento {
         this.cidade = cidade;
     }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
     public Double getLongitude() {
         return longitude;
     }
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public String getTipoDeComida() {
