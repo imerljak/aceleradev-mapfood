@@ -1,4 +1,4 @@
-restaurant_id,restaurant,address_city,longitude,latitude,dish_description
+id,nome,cidade,longitude,latitude,tipoDeComida
 5640f4538237d9c4aaf3b751c4d11769b3fc1e3165ed3b912c508768f7fc15fd,Monteiro´s Lanches,SAO PAULO,-46.640973,-23.603658,Lanches
 a660f6374ab1a743468f576cb89e3a8cd9b9776a363ada7002a5db6066a8b572,True Food,SAO PAULO,-46.657908,-23.554423,Comida Saudável
 07fc65555705243de378cc34222909fe9f44ad055b855ec8b7b9b8df86d70874,Red Galeteria,SAO PAULO,-46.688782,-23.600529,Comida Variada

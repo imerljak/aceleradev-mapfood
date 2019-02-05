@@ -4,7 +4,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
-class PointFactory {
+final class PointFactory {
 
     private static final GeometryFactory FACTORY = new GeometryFactory();
 

@@ -4,7 +4,7 @@ import com.vividsolutions.jts.geom.Point;
 import mapfood.model.dto.ClienteDTO;
 import mapfood.model.jpa.Cliente;
 
-public class ClienteFactory {
+public final class ClienteFactory {
 
     public static ClienteDTO getInstance(Cliente cliente) {
         final ClienteDTO clienteDTO = new ClienteDTO();

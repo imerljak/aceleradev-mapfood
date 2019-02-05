@@ -4,7 +4,7 @@ import com.vividsolutions.jts.geom.Point;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
 
-public class MotoboyFactory {
+public final class MotoboyFactory {
 
     public static MotoboyDTO getInstance(Motoboy motoboy) {
         final MotoboyDTO motoboyDTO = new MotoboyDTO();
@@ -16,7 +16,7 @@ public class MotoboyFactory {
     }
 
     public static Motoboy getInstance(MotoboyDTO motoboyDTO) {
-        Motoboy motoboy = new Motoboy();
+        final Motoboy motoboy = new Motoboy();
         motoboy.setId(motoboyDTO.getId());
 
         Point point = new PointFactory().fromLatLong(motoboyDTO.getLatitude(), motoboyDTO.getLongitude());

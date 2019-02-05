@@ -1,4 +1,4 @@
-item_description,item_id,restaurant_id,restaurant,classification,unit_price,address_city
+descricao,id,idEstabelecimento,nomeEstabelecimento,classificacao,precoUnitario,cidade
 Galinhada executivo,00002d8401f2d47cef5bb54b4e1cea226ec5155f2b5fb5fab4163b71d3eeb281,3848076bc47f22e56d585493e80f8563872b5f6912e7647d346c51096bfb56be,Mineiro Delivery - Boa Viagem,"Almoço por até R$ 13,90",13.9,RECIFE
 Original - 250g,00006fa61eebf64da44f96788d6efb4a03f3dbcc6b0cfce08fce3e5095f364f9,c4abeac0f155295b3ca8e0e76a9bb8689b5dc0b9f46093f83745c9c0df13e83c,Kev Dutch Bbq,Burguers - 250g,36,PORTO ALEGRE
 Big Esfiha de Peperone e Queijo,00007964e46724000380162eb5bb541bd9213d309e766634396c669c05236fe9,77d9396107f4d55d9867880e8835ea071267bf6ec9a1bca797c112527856163a,Pizzaria Familia Momentos,Esfihas Salgadas ,9.5,SAO PAULO
