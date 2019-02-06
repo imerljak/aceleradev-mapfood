@@ -12,7 +12,7 @@ import mapfood.factory.MotoboyFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
 
-public class MotoboyServiceImp implements MotoboyService{
+public class MotoboyServiceImpl implements MotoboyService{
 
 	@Autowired
 	private MongoOperations mongo;
@@ -25,7 +25,7 @@ public class MotoboyServiceImp implements MotoboyService{
 
 	@Override
 	public List<MotoboyDTO> buscaPorAproximacao(Double latitude, Double longitude, Double raioEmKm) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
