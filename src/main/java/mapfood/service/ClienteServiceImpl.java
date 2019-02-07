@@ -11,22 +11,23 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import mapfood.factory.ClienteFactory;
 import mapfood.model.dto.ClienteDTO;
 import mapfood.model.jpa.Cliente;
+import mapfood.repository.sql.ClienteRepository;
 
 
 public class ClienteServiceImpl implements ClienteService {
 	
 
 	@Autowired
-	private MongoOperations mongo;
+	private ClienteRepository cliente;
 	
 	@Override
 	public List<ClienteDTO> buscaTodos() {
-		return StreamSupport.stream(mongo.findAll(Cliente.class).spliterator(), false).map(ClienteFactory::getInstance).collect(Collectors.toList());		
+		return StreamSupport.stream(cliente.findAll().spliterator(), false).map(ClienteFactory::getInstance).collect(Collectors.toList());	
 	}
 
 	@Override
 	public Optional<ClienteDTO> buscaPorId(Long id) {
-		return ClienteFactory.getInstance(mongo.findById(id, Cliente.class));
+		return null; //ClienteFactory.getInstance(cliente.findById(id);
 		
 	}
 

@@ -19,7 +19,7 @@ public interface ClienteService {
      *
      * @return opcional de cliente
      */
-    ClienteDTO buscaLocalizacaoPorId(Long id);
+    Optional<ClienteDTO> buscaPorId(Long id);
     
     
 

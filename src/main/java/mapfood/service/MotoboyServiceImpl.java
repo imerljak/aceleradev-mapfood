@@ -11,16 +11,17 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import mapfood.factory.MotoboyFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
+import mapfood.repository.sql.MotoboyRepository;
 
 public class MotoboyServiceImpl implements MotoboyService{
 
 	@Autowired
-	private MongoOperations mongo;
+	private MotoboyRepository motoboy;
 	
 	
 	@Override
 	public List<MotoboyDTO> buscaTodos() {
-		return StreamSupport.stream(mongo.findAll(Motoboy.class).spliterator(), false).map(MotoboyFactory::getInstance).collect(Collectors.toList());		
+		return StreamSupport.stream(motoboy.findAll().spliterator(), false).map(MotoboyFactory::getInstance).collect(Collectors.toList());		
 	}
 
 	@Override
