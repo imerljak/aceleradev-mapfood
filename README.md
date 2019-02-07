@@ -1,5 +1,26 @@
 # Projeto MapFood
 
+## Sobre a Solução
+
+Esta implementação utiliza `PostgreSQL` e `MongoDB` como solução de base de dados. Com o objetivo de utilizar o melhor dos dois mundos. A base de dados relacional para informações bem estruturadas que precisam de velocidade na atualização/inserção de dados. E a base de dados *não* relacional para informações com dados que exigem maior flexibilidade e velocidade na consulta/relatórios.
+
+Como os dados existentes para a `API` possuem informações espaciais, foi definido a utilização do plugin `postgis` que permite o armazenamento e consulta de dados espaciais diretamente na base da dados, facilitando o trabalho com esses dados e otimizando a obtenção das informações necessárias para resolver o problema da melhor rota pela `API`.
+
+
+## Configurando o Ambiente.
+
+Para o funcionamento pleno deste projeto em seu ambiente é necessário ter instalados:
+* PostgreSQL
+* MongoDB
+
+Para o PostgreSQL ainda é necessário a instalação do plugin `Postgis` na sua máquina.
+Após instalado é preciso **habilitar** o plugin em sua base de dados, executando o seguinte comando SQL:
+```sql
+create extension postgis;
+```
+
+---
+
 ## Descrição
 
 Para utilizar a metodologia CBL - Challenge Based Learning, os participantes do programa executarão um projeto real baseado nos aprendizados que recebem dos tutores, mentores e equipes da Code:Nation e da Movile. Para isso, os selecionados serão divididos em squads para execução do projeto MapFood.
