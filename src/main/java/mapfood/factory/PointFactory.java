@@ -7,8 +7,10 @@ import com.vividsolutions.jts.geom.Point;
 final class PointFactory {
 
     private static final GeometryFactory FACTORY = new GeometryFactory();
+    private static final CoordinateFactory COORDINATE_FACTORY = new CoordinateFactory();
 
     Point fromLatLong(Double latitude, Double longitude) {
-        return FACTORY.createPoint(new Coordinate(longitude, latitude));
+        Coordinate coordinate = COORDINATE_FACTORY.getInstance(latitude, longitude);
+        return FACTORY.createPoint(coordinate);
     }
 }
