@@ -59,6 +59,13 @@
             <artifactId>hibernate-spatial</artifactId>
         </dependency>
 
+        <!--Google Maps Services (contains Directions API)-->
+        <dependency>
+            <groupId>com.google.maps</groupId>
+            <artifactId>google-maps-services</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
