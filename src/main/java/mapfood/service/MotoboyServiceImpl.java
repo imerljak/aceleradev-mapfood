@@ -3,8 +3,8 @@ package mapfood.service;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import mapfood.factory.CoordinateFactory;
-import mapfood.factory.GeometryFactory;
 import mapfood.factory.MotoboyFactory;
+import mapfood.factory.MyGeometryFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.repository.sql.MotoboyRepository;
 import mapfood.spatial.CoordinateComparator;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class MotoboyServiceImpl implements MotoboyService {
 
     private final CoordinateFactory coordinateFactory = new CoordinateFactory();
-    private final GeometryFactory geometryFactory = new GeometryFactory();
+    private final MyGeometryFactory geometryFactory = new MyGeometryFactory();
 
     private final MotoboyRepository repository;
 
@@ -44,7 +44,7 @@ public class MotoboyServiceImpl implements MotoboyService {
 
         return repository.findByPosicaoIsWithin(geometry)
                 .stream()
-                .sorted(coordinateComparator.getInstance())
+                .sorted(coordinateComparator.getMotoboyComparator())
                 .map(MotoboyFactory::getInstance)
                 .collect(Collectors.toList());
     }

@@ -7,51 +7,124 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.TrafficModel;
 import com.google.maps.model.TravelMode;
-import mapfood.model.dto.RotaEntrega;
+import com.vividsolutions.jts.geom.Point;
+import mapfood.exceptions.ClienteMuitoDistanteException;
+import mapfood.exceptions.ClienteNaoEncontradoException;
+import mapfood.exceptions.EstabelecimentoNaoEncontradoException;
+import mapfood.factory.PointFactory;
 import mapfood.model.dto.SolicitacaoEntrega;
+import mapfood.model.mongodb.Estabelecimento;
+import mapfood.spatial.CoordinateComparator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RotasServiceByGoogleDirectionsApi implements RotasService {
 
+    private static final double EARTH_RADIUS = 6378137;
     private final GeoApiContext apiContext;
+
     private final EstabelecimentoService estabelecimentoService;
     private final ClienteService clienteService;
+    private final MotoboyService motoboyService;
 
-    public RotasServiceByGoogleDirectionsApi(GeoApiContext apiContext, EstabelecimentoService estabelecimentoService, ClienteService clienteService) {
+
+    @Value("${mapfood.valores.limite-distancia-entrega}")
+    private Double limiteKmEntrega;
+
+    @Value("${mapfood.valores.limite-distancia-motoboy}")
+    private Double limiteDistanciaMotoboy;
+
+    @Value("${mapfood.valores.tempo-preparo}")
+    private Integer tempoPreparo;
+
+    public RotasServiceByGoogleDirectionsApi(GeoApiContext apiContext, EstabelecimentoService estabelecimentoService, ClienteService clienteService, MotoboyService motoboyService) {
         this.apiContext = apiContext;
         this.estabelecimentoService = estabelecimentoService;
         this.clienteService = clienteService;
+        this.motoboyService = motoboyService;
     }
 
     @Override
-    public List<RotaEntrega> getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega) {
+    public DirectionsResult getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega) {
 
-        // TODO: Recuperar origin de solicitacaoEntrega.estabelecimento
-        LatLng origin = new LatLng(1D, -1D);
-
-        // TODO: Recuperar waypoints de solicitacaoEntrega.clientes
-        List<LatLng> waypoints = Collections.emptyList();
-
-        DirectionsResult directionsResult = this.solicitaRotaAoServico(origin, waypoints);
+        LatLng origin = getLatLngEstabelecimento(solicitacaoEntrega);
+        List<LatLng> waypoints = getLatLngClientes(solicitacaoEntrega, origin);
 
         // Criar retorno da api mapfood com dados do DirectionsResult.
 
-        return null;
+
+        motoboyService.buscaPorAproximacao(origin.lat, origin.lng, limiteKmEntrega);
+
+        return this.solicitaRotaAoServico(origin, waypoints);
+    }
+
+    private LatLng getLatLngEstabelecimento(SolicitacaoEntrega solicitacaoEntrega) {
+        Estabelecimento estabelecimento = estabelecimentoService.findById(solicitacaoEntrega.getIdEstabelecimento())
+
+                // TODO: Melhorar validação.
+                .orElseThrow(EstabelecimentoNaoEncontradoException::new);
+
+
+        return new LatLng(estabelecimento.getLatitude(), estabelecimento.getLongitude());
+    }
+
+    private List<LatLng> getLatLngClientes(SolicitacaoEntrega solicitacaoEntrega, LatLng origin) {
+        List<LatLng> latLngs = solicitacaoEntrega.getPedidos()
+                .stream()
+                .map(pedido ->
+                        clienteService.buscaPorId(
+                                pedido.getIdCliente()).orElseThrow(ClienteNaoEncontradoException::new))
+                .map(dto -> new LatLng(dto.getLatitude(), dto.getLongitude()))
+
+                .sorted(new CoordinateComparator(origin).getLatLngComparator())
+
+                .collect(Collectors.toList());
+
+        PointFactory pointFactory = new PointFactory();
+        Point originPoint = pointFactory.fromLatLong(origin.lat, origin.lng);
+
+        List<LatLng> pontosForaDaArea = latLngs
+                .stream()
+                .map(pointFactory::fromLatLng)
+                .filter(destPoint -> toMeters(originPoint.distance(destPoint)) > (limiteKmEntrega * 1000))
+                .map(point -> new LatLng(point.getY(), point.getX()))
+                .collect(Collectors.toList());
+
+        if (!pontosForaDaArea.isEmpty()) {
+            throw new ClienteMuitoDistanteException(pontosForaDaArea);
+        }
+
+        return latLngs;
+    }
+
+    private Double toMeters(double degrees) {
+        System.out.println("degrees = " + degrees);
+        Double meters = degrees * (Math.PI / 180) * EARTH_RADIUS;
+        System.out.println("meters = " + meters);
+        return meters;
     }
 
     private DirectionsResult solicitaRotaAoServico(LatLng origin, List<LatLng> waypoints) {
-        //1. Recuperar clientes por ordem de distância (usar coordinateComparator?)
+
+        LatLng destination = waypoints.get(waypoints.size() - 1);
+        waypoints.remove(destination);
+
+        Instant horaSaida = calcularHoraSaida(waypoints.size());
 
         try {
             return DirectionsApi.newRequest(apiContext)
                     .origin(origin)
                     .waypoints(waypoints.toArray(new LatLng[]{}))
+                    .destination(destination)
                     .optimizeWaypoints(true)
+                    .departureTime(horaSaida)
                     .mode(TravelMode.DRIVING)
                     .trafficModel(TrafficModel.BEST_GUESS)
                     .await(); // await ou callback??
@@ -61,5 +134,9 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private Instant calcularHoraSaida(int size) {
+        return Instant.now().plus(Duration.ofMinutes(size * tempoPreparo));
     }
 }

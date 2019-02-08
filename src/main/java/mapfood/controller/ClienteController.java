@@ -1,32 +1,33 @@
 package mapfood.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import mapfood.model.dto.ClienteDTO;
+import mapfood.service.ClienteService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mapfood.model.dto.ClienteDTO;
-import mapfood.service.ClienteService;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path="v1")
+@RequestMapping("/v1/cliente")
 public class ClienteController {
 
-	@Autowired
-	private ClienteService service;
-		
-	@GetMapping("/cliente")
-	public List<ClienteDTO> getClientes(){
-		return service.buscaTodos();		
-	}
-	
-	@GetMapping("/cliente/{id}")
-	public Optional<ClienteDTO> getClientesPorId(@PathVariable Long id){
-		return service.buscaPorId(id);		
-	}
-	
+    private final ClienteService service;
+
+    public ClienteController(ClienteService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<ClienteDTO> getClientes() {
+        return service.buscaTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<ClienteDTO> getClientesPorId(@PathVariable Long id) {
+        return service.buscaPorId(id);
+    }
+
 }
