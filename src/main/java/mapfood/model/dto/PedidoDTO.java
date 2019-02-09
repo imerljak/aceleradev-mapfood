@@ -6,7 +6,7 @@ import mapfood.model.mongodb.ProdutoEstabelecimento;
 
 public class PedidoDTO {
 	private  String clienteId;
-	private List<ProdutoEstabelecimento> produto;
+	private List<String> produto;
 	
 		
 	public String getClienteId() {
@@ -15,12 +15,13 @@ public class PedidoDTO {
 	public void setClienteId(String clienteId) {
 		this.clienteId = clienteId;
 	}
-	public List<ProdutoEstabelecimento> getProduto() {
+	public List<String> getProduto() {
 		return produto;
 	}
-	public void setProduto(List<ProdutoEstabelecimento> produto) {
+	public void setProduto(List<String> produto) {
 		this.produto = produto;
 	}
+	
 	
 	
 	
