@@ -1,6 +1,6 @@
 package mapfood.exceptions;
 
-public class ClienteNaoEncontradoException extends RuntimeException {
+public class ClienteNaoEncontradoException extends BusinessException {
     public ClienteNaoEncontradoException() {
     }
 

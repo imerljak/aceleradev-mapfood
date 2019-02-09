@@ -71,7 +71,6 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
                 // TODO: Melhorar validação.
                 .orElseThrow(EstabelecimentoNaoEncontradoException::new);
 
-
         return new LatLng(estabelecimento.getLatitude(), estabelecimento.getLongitude());
     }
 
@@ -82,11 +81,13 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
                         clienteService.buscaPorId(
                                 pedido.getIdCliente()).orElseThrow(ClienteNaoEncontradoException::new))
                 .map(dto -> new LatLng(dto.getLatitude(), dto.getLongitude()))
-
                 .sorted(new CoordinateComparator(origin).getLatLngComparator())
-
                 .collect(Collectors.toList());
 
+        return latLngs;
+    }
+
+    private List<LatLng> getPointsOutsideTheArea(List<LatLng> latLngs, LatLng origin){
         PointFactory pointFactory = new PointFactory();
         Point originPoint = pointFactory.fromLatLong(origin.lat, origin.lng);
 
@@ -101,7 +102,7 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
             throw new ClienteMuitoDistanteException(pontosForaDaArea);
         }
 
-        return latLngs;
+        return pontosForaDaArea;
     }
 
     private Double toMeters(double degrees) {

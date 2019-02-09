@@ -1,6 +1,6 @@
 package mapfood.exceptions;
 
-public class EstabelecimentoNaoEncontradoException extends RuntimeException {
+public class EstabelecimentoNaoEncontradoException extends BusinessException {
 
     public EstabelecimentoNaoEncontradoException() {
     }
