@@ -70,4 +70,5 @@ public class ProdutoEstabelecimento {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
 }

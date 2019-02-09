@@ -11,4 +11,5 @@ public class EstabelecimentoNaoEncontradoException extends BusinessException {
     public String getMensagemErro() {
         return String.format("Estabelecimento não encontrado: %d", idEstabelecimento);
     }
+
 }

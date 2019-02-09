@@ -32,5 +32,4 @@ public class ClienteServiceImpl implements ClienteService {
         return repository.findById(id).map(ClienteFactory::getInstance);
     }
 
-
 }

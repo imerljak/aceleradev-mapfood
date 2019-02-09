@@ -14,7 +14,6 @@ public class EstabelecimentoController {
 
     private final EstabelecimentoService service;
 
-
     public EstabelecimentoController(EstabelecimentoService service) {
         this.service = service;
     }

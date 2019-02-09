@@ -1,11 +1,7 @@
 package mapfood.exceptions;
 
-import com.google.maps.model.LatLng;
 import mapfood.model.dto.ClienteDTO;
 import mapfood.model.jpa.Cliente;
-import org.apache.logging.log4j.util.Strings;
-
-import java.util.List;
 
 public class ClienteMuitoDistanteException extends BusinessException {
 

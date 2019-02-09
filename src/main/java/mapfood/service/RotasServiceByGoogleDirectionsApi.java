@@ -130,4 +130,5 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
     private Instant calcularHoraSaida(int size) {
         return Instant.now().plus(Duration.ofMinutes(size * tempoPreparo));
     }
+
 }

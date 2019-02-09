@@ -12,4 +12,5 @@ public class ClienteNaoEncontradoException extends BusinessException {
     public String getMensagemErro() {
         return String.format("Cliente não encontrado: %d", idCliente);
     }
+
 }

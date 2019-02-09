@@ -24,4 +24,5 @@ public final class MotoboyFactory {
 
         return motoboy;
     }
+
 }

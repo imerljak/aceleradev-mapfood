@@ -39,4 +39,5 @@ public class SolicitacaoEntrega {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
 }
