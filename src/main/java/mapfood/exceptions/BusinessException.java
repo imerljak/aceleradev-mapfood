@@ -5,14 +5,12 @@ import org.springframework.http.ResponseEntity;
 public abstract class BusinessException extends RuntimeException {
 
     public BusinessException(){
-
-    }
-
-    public BusinessException(String message) {
-        super(message);
+        super();
     }
 
     public ResponseEntity<?> constroiResposta() {
-       return ResponseEntity.ok(new RespostaErro());
+       return ResponseEntity.ok(new RespostaErro(getMensagemErro()));
     }
+
+    public abstract String getMensagemErro();
 }

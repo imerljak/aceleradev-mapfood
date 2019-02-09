@@ -10,16 +10,4 @@ public class RespostaErro {
     public String getMensagem() {
         return mensagem;
     }
-
-    public String clienteMuitoDistante(){
-        return "Cliente muito distante!";
-    }
-
-    public String clienteNaoEncontrado(){
-        return "Cliente não encontrado!";
-    }
-
-    public String estabelecimentoNaoEncontrado(){
-        return "Estabelecimento não encontrado!";
-    }
 }
