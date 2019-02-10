@@ -14,8 +14,6 @@ public class SaidaDTO {
     private Long[] idClientes;
     private Object rota; // qual objeto??
 
-    public SaidaDTO(){}
-
     public Long getIdMotoboy() {
         return idMotoboy;
     }
