@@ -1,6 +1,6 @@
 package mapfood.service;
 
-import com.google.maps.model.DirectionsResult;
+import mapfood.model.dto.SaidaDTO;
 import mapfood.model.dto.SolicitacaoEntrega;
 
 public interface RotasService {
@@ -11,6 +11,6 @@ public interface RotasService {
      * @param solicitacaoEntrega solicitacao de entrega para calcular rota.
      * @return Lista de RotaEntrega
      */
-    DirectionsResult getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega);
+    SaidaDTO getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega);
 
 }

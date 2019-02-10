@@ -1,20 +1,16 @@
 package mapfood.model.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class SaidaDTO {
 
-    @NotNull
-    @NotEmpty
     private Long idMotoboy;
-    private double tempoTotal;
-    private double consumoTotal;
-    private double distanciaTotal;
+    private double consumoCombustivel;
+    private double distanciaEmMetros;
+    private double duracaoEmSegundos;
     private Long[] idClientes;
     private Object rota; // qual objeto??
 
-    public SaidaDTO(){}
+    public SaidaDTO() {
+    }
 
     public Long getIdMotoboy() {
         return idMotoboy;
@@ -24,28 +20,28 @@ public class SaidaDTO {
         this.idMotoboy = idMotoboy;
     }
 
-    public double getTempoTotal() {
-        return tempoTotal;
+    public double getDuracaoEmSegundos() {
+        return duracaoEmSegundos;
     }
 
-    public void setTempoTotal(double tempoTotal) {
-        this.tempoTotal = tempoTotal;
+    public void setDuracaoEmSegundos(double duracaoEmSegundos) {
+        this.duracaoEmSegundos = duracaoEmSegundos;
     }
 
-    public double getConsumoTotal() {
-        return consumoTotal;
+    public double getConsumoCombustivel() {
+        return consumoCombustivel;
     }
 
-    public void setConsumoTotal(double consumoTotal) {
-        this.consumoTotal = consumoTotal;
+    public void setConsumoCombustivel(double consumoCombustivel) {
+        this.consumoCombustivel = consumoCombustivel;
     }
 
-    public double getDistanciaTotal() {
-        return distanciaTotal;
+    public double getDistanciaEmMetros() {
+        return distanciaEmMetros;
     }
 
-    public void setDistanciaTotal(double distanciaTotal) {
-        this.distanciaTotal = distanciaTotal;
+    public void setDistanciaEmMetros(double distanciaEmMetros) {
+        this.distanciaEmMetros = distanciaEmMetros;
     }
 
     public Long[] getIdClientes() {

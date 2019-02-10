@@ -1,6 +1,5 @@
 package mapfood.controller;
 
-import com.google.maps.model.DirectionsResult;
 import mapfood.model.dto.SolicitacaoEntrega;
 import mapfood.service.RotasService;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,7 @@ public class RotasController {
 
     @PostMapping
     public ResponseEntity<?> getRotaParaPedido(@Validated @RequestBody SolicitacaoEntrega solicitacao) {
-        DirectionsResult result = rotasService.getMelhorRotaPara(solicitacao);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(rotasService.getMelhorRotaPara(solicitacao));
     }
 
 }

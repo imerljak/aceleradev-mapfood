@@ -23,7 +23,7 @@ public interface MotoboyService {
      * @param raioEmKm  raio em kms para considerar a pesquisa.
      * @return lista de motoboys ordenada pela distancia relativa a lat/long informada.
      */
-    List<MotoboyDTO> buscaPorAproximacao(Double latitude, Double longitude, Double raioEmKm);
+    Optional<MotoboyDTO> buscaMaisProximo(Double latitude, Double longitude, Double raioEmKm);
 
     /**
      * Busca um motoboy pelo seu id e retorna um {@link Optional} contendo o motoboy ou não, caso não exista.

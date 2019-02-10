@@ -2,12 +2,14 @@ package mapfood.service;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
 import mapfood.factory.CoordinateFactory;
 import mapfood.factory.MotoboyFactory;
 import mapfood.factory.MyGeometryFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.repository.sql.MotoboyRepository;
-import mapfood.spatial.CoordinateComparator;
+import mapfood.spatial.GeoUtils;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 public class MotoboyServiceImpl implements MotoboyService {
 
     private final CoordinateFactory coordinateFactory = new CoordinateFactory();
-    private final MyGeometryFactory geometryFactory = new MyGeometryFactory();
+    private final GeometryFactory geometryFactory = new GeometryFactory();
 
     private final MotoboyRepository repository;
 
@@ -35,18 +37,21 @@ public class MotoboyServiceImpl implements MotoboyService {
     }
 
     @Override
-    public List<MotoboyDTO> buscaPorAproximacao(Double latitude, Double longitude, Double raioEmKm) {
+    public Optional<MotoboyDTO> buscaMaisProximo(Double latitude, Double longitude, Double raioEmKm) {
 
         Coordinate coordinate = coordinateFactory.getInstance(latitude, longitude);
-        Geometry geometry = geometryFactory.createCircle(coordinate, raioEmKm);
 
-        CoordinateComparator coordinateComparator = new CoordinateComparator(coordinate);
+        final Double raioEmMetros = raioEmKm * 1000;
+        final Double raioEmGraus = GeoUtils.metersToDegrees(raioEmMetros);
 
-        return repository.findByPosicaoIsWithin(geometry)
+        Geometry centro = geometryFactory.createPoint(coordinate);
+        Geometry area = new MyGeometryFactory().createCircle(coordinate, raioEmGraus);
+
+        return repository
+                .buscarMaisProximo(area, centro, PageRequest.of(0, 1))
                 .stream()
-                .sorted(coordinateComparator.getMotoboyComparator())
                 .map(MotoboyFactory::getInstance)
-                .collect(Collectors.toList());
+                .findFirst();
     }
 
     @Override
