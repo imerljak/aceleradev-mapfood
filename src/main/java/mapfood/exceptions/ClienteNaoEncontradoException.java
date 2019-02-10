@@ -1,10 +1,16 @@
 package mapfood.exceptions;
 
-public class ClienteNaoEncontradoException extends RuntimeException {
-    public ClienteNaoEncontradoException() {
+public class ClienteNaoEncontradoException extends BusinessException {
+
+    private final Long idCliente;
+
+    public ClienteNaoEncontradoException(Long cliente) {
+        idCliente = cliente;
     }
 
-    public ClienteNaoEncontradoException(String s) {
-        super(s);
+    @Override
+    public String getMensagemErro() {
+        return String.format("Cliente não encontrado: %d", idCliente);
     }
+
 }

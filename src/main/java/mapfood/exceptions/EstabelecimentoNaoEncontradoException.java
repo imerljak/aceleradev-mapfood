@@ -1,11 +1,15 @@
 package mapfood.exceptions;
 
-public class EstabelecimentoNaoEncontradoException extends RuntimeException {
+public class EstabelecimentoNaoEncontradoException extends BusinessException {
+    private String idEstabelecimento;
 
-    public EstabelecimentoNaoEncontradoException() {
+    public EstabelecimentoNaoEncontradoException(String estabelecimento) {
+        idEstabelecimento = estabelecimento;
     }
 
-    public EstabelecimentoNaoEncontradoException(String s) {
-        super(s);
+    @Override
+    public String getMensagemErro() {
+        return String.format("Estabelecimento não encontrado: %d", idEstabelecimento);
     }
+
 }

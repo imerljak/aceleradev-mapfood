@@ -30,4 +30,5 @@ public class Cliente {
     public void setPosicao(Point posicao) {
         this.posicao = posicao;
     }
+
 }

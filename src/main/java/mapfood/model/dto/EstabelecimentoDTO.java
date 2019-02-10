@@ -56,4 +56,5 @@ public class EstabelecimentoDTO {
     public void setTipoDeComida(String tipoDeComida) {
         this.tipoDeComida = tipoDeComida;
     }
+
 }

@@ -1,5 +1,10 @@
 # Projeto MapFood
 
+
+# Equipe: Mighty Ducks
+![](https://s3951.pcdn.co/wp-content/uploads/2015/09/Ducks1-532x480.gif)
+
+
 ## Sobre a Solução
 
 Esta implementação utiliza `PostgreSQL` e `MongoDB` como solução de base de dados. Com o objetivo de utilizar o melhor dos dois mundos. A base de dados relacional para informações bem estruturadas que precisam de velocidade na atualização/inserção de dados. E a base de dados *não* relacional para informações com dados que exigem maior flexibilidade e velocidade na consulta/relatórios.

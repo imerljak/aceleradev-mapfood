@@ -31,4 +31,5 @@ public class ClienteDTO {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
 }

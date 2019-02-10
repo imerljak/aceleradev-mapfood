@@ -95,10 +95,7 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
 
     private LatLng getLatLngEstabelecimento(SolicitacaoEntrega solicitacaoEntrega) {
         Estabelecimento estabelecimento = estabelecimentoService.findById(solicitacaoEntrega.getIdEstabelecimento())
-
-                // TODO: Melhorar validação.
-                .orElseThrow(EstabelecimentoNaoEncontradoException::new);
-
+                .orElseThrow(() -> new EstabelecimentoNaoEncontradoException(solicitacaoEntrega.getIdEstabelecimento()));
 
         return new LatLng(estabelecimento.getLatitude(), estabelecimento.getLongitude());
     }
@@ -109,17 +106,12 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
                 .map(pedido ->
                         clienteService.buscaPorId(
                                 pedido.getIdCliente())
-                                .orElseThrow(ClienteNaoEncontradoException::new))
-
+                                .orElseThrow(() -> new ClienteNaoEncontradoException(pedido.getIdCliente())))
                 .map(dto -> new LatLng(dto.getLatitude(), dto.getLongitude()))
-
                 .sorted(new CoordinateComparator(origin).getLatLngComparator())
-
                 .collect(Collectors.toList());
 
         PointFactory pointFactory = new PointFactory();
-
-
         Point originPoint = pointFactory.fromLatLong(origin.lat, origin.lng);
 
         List<LatLng> pontosForaDaArea = latLngs
@@ -155,8 +147,7 @@ public class RotasServiceByGoogleDirectionsApi implements RotasService {
                     .await(); // await ou callback??
 
         } catch (ApiException | InterruptedException | IOException e) {
-            // TODO: incluir exception generica unchecked de preferencia.
-            e.printStackTrace();
+            System.out.println("Erro ao solicitar rota!");
             return null;
         }
     }

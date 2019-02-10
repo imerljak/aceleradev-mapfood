@@ -67,4 +67,5 @@ public class Estabelecimento {
     public void setTipoDeComida(String tipoDeComida) {
         this.tipoDeComida = tipoDeComida;
     }
+
 }

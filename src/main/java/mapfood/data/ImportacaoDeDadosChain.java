@@ -26,4 +26,5 @@ public class ImportacaoDeDadosChain implements ApplicationListener<ContextRefres
         logger.info("Aplicação iniciada, começando importação de dados.");
         importadores.forEach(ImportadorDeDados::importar);
     }
+
 }
