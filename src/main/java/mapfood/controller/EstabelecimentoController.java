@@ -1,6 +1,6 @@
 package mapfood.controller;
 
-import mapfood.model.mongodb.Estabelecimento;
+import mapfood.model.dto.EstabelecimentoDTO;
 import mapfood.service.EstabelecimentoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class EstabelecimentoController {
     }
 
     @GetMapping
-    public List<Estabelecimento> getTodosEstabelecimentos() {
+    public List<EstabelecimentoDTO> getTodosEstabelecimentos() {
         return service.findAll();
     }
 }

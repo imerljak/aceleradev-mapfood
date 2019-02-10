@@ -1,12 +1,11 @@
 package mapfood.service;
 
-import com.vividsolutions.jts.geom.Point;
 import mapfood.factory.MotoboyFactory;
-import mapfood.factory.PointFactory;
 import mapfood.model.dto.MotoboyDTO;
+import mapfood.model.jpa.Posicao;
 import mapfood.repository.sql.MotoboyRepository;
-import mapfood.spatial.CoordinateComparator;
-import mapfood.spatial.GeoUtils;
+import mapfood.utils.GeoUtils;
+import mapfood.utils.PosicaoComparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,23 +25,20 @@ public class MotoboyServiceImpl implements MotoboyService {
     @Override
     public List<MotoboyDTO> buscaTodos() {
         return repository.findAll()
-                .stream()
+                .parallelStream()
                 .map(MotoboyFactory::getInstance)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public Optional<MotoboyDTO> buscaMaisProximo(Double latitude, Double longitude, Double raioEmKm) {
-
-        Point pontoOrigem = new PointFactory().fromLatLong(latitude, longitude);
-
-        CoordinateComparator comparator = new CoordinateComparator(pontoOrigem.getCoordinate());
+    public Optional<MotoboyDTO> buscaMaisProximo(Posicao posicao, Double raioEmKm) {
+        PosicaoComparator comparator = new PosicaoComparator(posicao);
 
         // TODO: Melhorar essa consulta.
         return repository.streamAll()
                 .parallel()
-                .filter(motoboy -> GeoUtils.haversineDistance(pontoOrigem, motoboy.getPosicao()) < raioEmKm)
+                .filter(motoboy -> GeoUtils.haversineDistance(posicao, motoboy.getPosicao()) < raioEmKm)
                 .min(comparator.getMotoboyComparator())
                 .map(MotoboyFactory::getInstance);
 

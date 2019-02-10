@@ -1,6 +1,6 @@
-package mapfood.spatial;
+package mapfood.utils;
 
-import com.vividsolutions.jts.geom.Point;
+import mapfood.model.jpa.Posicao;
 
 public class GeoUtils {
 
@@ -9,12 +9,17 @@ public class GeoUtils {
     /**
      * Retorna distância aproximada (em kms) entre dois pontos aplicando a formula de Haversine.
      *
-     * @param pointA ponto a
-     * @param pointB ponto b
+     * @param posicaoA ponto a
+     * @param posicaoB ponto b
      * @return distancia aproximada em kilometros
      */
-    public static double haversineDistance(Point pointA, Point pointB) {
-        return haversineDistance(pointA.getY(), pointA.getX(), pointB.getY(), pointB.getX());
+    public static double haversineDistance(Posicao posicaoA, Posicao posicaoB) {
+        return haversineDistance(
+                posicaoA.getLatitude(),
+                posicaoA.getLongitude(),
+                posicaoB.getLatitude(),
+                posicaoB.getLongitude()
+        );
     }
 
     /**

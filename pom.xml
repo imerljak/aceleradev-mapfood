@@ -53,12 +53,6 @@
             <version>2.9.8</version>
         </dependency>
 
-        <!--Support for spatial data (lat/long)-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-spatial</artifactId>
-        </dependency>
-
         <!--Google Maps Services (contains Directions API)-->
         <dependency>
             <groupId>com.google.maps</groupId>

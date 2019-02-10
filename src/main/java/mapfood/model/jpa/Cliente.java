@@ -1,19 +1,25 @@
 package mapfood.model.jpa;
 
-import com.vividsolutions.jts.geom.Point;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "clientes")
 @Entity
 public class Cliente {
 
+    @JsonIgnore
     @Id
+    @Column(columnDefinition = "SERIAL")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Point posicao;
+    @JsonProperty
+    private Double latitude;
+
+    @JsonProperty
+    private Double longitude;
 
     public Long getId() {
         return id;
@@ -23,12 +29,14 @@ public class Cliente {
         this.id = id;
     }
 
-    public Point getPosicao() {
-        return posicao;
+    @JsonIgnore
+    public Posicao getPosicao() {
+        return Posicao.of(latitude, longitude);
     }
 
-    public void setPosicao(Point posicao) {
-        this.posicao = posicao;
+    public void setPosicao(Posicao posicao) {
+        this.latitude = posicao.getLatitude();
+        this.longitude = posicao.getLongitude();
     }
 
 }

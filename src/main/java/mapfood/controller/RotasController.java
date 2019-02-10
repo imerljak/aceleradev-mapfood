@@ -1,13 +1,15 @@
 package mapfood.controller;
 
+import mapfood.model.dto.ResultadoRota;
 import mapfood.model.dto.SolicitacaoEntrega;
 import mapfood.service.RotasService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/v1/rotas")
@@ -20,8 +22,8 @@ public class RotasController {
     }
 
     @PostMapping
-    public ResponseEntity<?> getRotaParaPedido(@Validated @RequestBody SolicitacaoEntrega solicitacao) {
-        return ResponseEntity.ok(rotasService.getMelhorRotaPara(solicitacao));
+    public CompletableFuture<ResultadoRota> getRotaParaPedido(@Validated @RequestBody SolicitacaoEntrega solicitacao) {
+        return rotasService.getMelhorRotaPara(solicitacao);
     }
 
 }

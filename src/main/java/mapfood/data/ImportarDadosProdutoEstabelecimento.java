@@ -1,8 +1,6 @@
 package mapfood.data;
 
 import mapfood.csv.LeitorDeCsv;
-import mapfood.factory.ProdutoEstabelecimentoFactory;
-import mapfood.model.dto.ProdutoEstabelecimentoDTO;
 import mapfood.model.mongodb.ProdutoEstabelecimento;
 import mapfood.repository.ProdutoEstabelecimentoRepository;
 import org.slf4j.Logger;
@@ -31,9 +29,8 @@ public class ImportarDadosProdutoEstabelecimento implements ImportadorDeDados {
             logger.info("Iniciando importação de dados.");
 
             List<ProdutoEstabelecimento> produtos = leitorDeCsv
-                    .lerDados(ProdutoEstabelecimentoDTO.class, "/csv/produtos-por-estabelecimento.csv")
+                    .lerDados(ProdutoEstabelecimento.class, "/csv/produtos-por-estabelecimento.csv")
                     .parallelStream()
-                    .map(ProdutoEstabelecimentoFactory::getInstance)
                     .collect(Collectors.toList());
 
             repository.saveAll(produtos);

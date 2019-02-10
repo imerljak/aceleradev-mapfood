@@ -3,6 +3,8 @@ package mapfood.service;
 import mapfood.model.dto.ResultadoRota;
 import mapfood.model.dto.SolicitacaoEntrega;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface RotasService {
 
     /**
@@ -11,6 +13,6 @@ public interface RotasService {
      * @param solicitacaoEntrega solicitacao de entrega para calcular rota.
      * @return Lista de RotaEntrega
      */
-    ResultadoRota getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega);
+    CompletableFuture<ResultadoRota> getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega);
 
 }

@@ -1,11 +1,13 @@
 package mapfood.service;
 
-import mapfood.model.mongodb.Estabelecimento;
+import mapfood.factory.EstabelecimentoFactory;
+import mapfood.model.dto.EstabelecimentoDTO;
 import mapfood.repository.no_sql.EstabelecimentoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EstabelecimentoServiceImpl implements EstabelecimentoService {
@@ -17,13 +19,16 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
     }
 
     @Override
-    public Optional<Estabelecimento> findById(String id) {
-        return repository.findById(id);
+    public Optional<EstabelecimentoDTO> findById(String id) {
+        return repository.findById(id).map(EstabelecimentoFactory::getInstance);
     }
 
     @Override
-    public List<Estabelecimento> findAll() {
-        return repository.findAll();
+    public List<EstabelecimentoDTO> findAll() {
+        return repository.findAll()
+                .parallelStream()
+                .map(EstabelecimentoFactory::getInstance)
+                .collect(Collectors.toList());
     }
 
 }

@@ -8,7 +8,7 @@ public class ResultadoRota {
     private double distanciaEmMetros;
     private Long duracaoEmSegundos;
     private Long[] idClientes;
-    private Object rota; // qual objeto??
+    private Rota rota;
 
     public ResultadoRota() {
     }
@@ -25,10 +25,6 @@ public class ResultadoRota {
         return duracaoEmSegundos;
     }
 
-    public void setDuracaoEmSegundos(Long duracaoEmSegundos) {
-        this.duracaoEmSegundos = duracaoEmSegundos;
-    }
-
     public double getConsumoCombustivel() {
         return consumoCombustivel;
     }
@@ -39,10 +35,6 @@ public class ResultadoRota {
 
     public double getDistanciaEmMetros() {
         return distanciaEmMetros;
-    }
-
-    public void setDistanciaEmMetros(double distanciaEmMetros) {
-        this.distanciaEmMetros = distanciaEmMetros;
     }
 
     public Long[] getIdClientes() {
@@ -57,8 +49,11 @@ public class ResultadoRota {
         return rota;
     }
 
-    public void setRota(Object rota) {
+    public void setRota(Rota rota) {
         this.rota = rota;
+
+        this.distanciaEmMetros = rota.getDistanciaTotal();
+        this.duracaoEmSegundos = rota.getDurataoTotalEmSegundos();
     }
 
     public String getIdEstabelecimento() {

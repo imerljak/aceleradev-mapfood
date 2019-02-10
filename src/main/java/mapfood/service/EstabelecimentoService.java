@@ -1,6 +1,6 @@
 package mapfood.service;
 
-import mapfood.model.mongodb.Estabelecimento;
+import mapfood.model.dto.EstabelecimentoDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,14 +13,14 @@ public interface EstabelecimentoService {
      * @param id id do estabelecimento
      * @return estabelecimento
      */
-    Optional<Estabelecimento> findById(String id);
+    Optional<EstabelecimentoDTO> findById(String id);
 
     /**
      * Retorna todos estabelecimentos registrados.
      *
      * @return lista de estabelecimentos
      */
-    List<Estabelecimento> findAll();
+    List<EstabelecimentoDTO> findAll();
 
     /*
      * TODO: método para retornar relalório de entregas do estabelecimento.

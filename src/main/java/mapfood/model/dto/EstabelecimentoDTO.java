@@ -1,21 +1,19 @@
 package mapfood.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import mapfood.model.jpa.Posicao;
+
 public class EstabelecimentoDTO {
 
-    private String id;
     private String nome;
     private String cidade;
+
+    @JsonProperty
     private Double longitude;
+    @JsonProperty
     private Double latitude;
+
     private String tipoDeComida;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -33,28 +31,21 @@ public class EstabelecimentoDTO {
         this.cidade = cidade;
     }
 
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
     public String getTipoDeComida() {
         return tipoDeComida;
     }
 
     public void setTipoDeComida(String tipoDeComida) {
         this.tipoDeComida = tipoDeComida;
+    }
+
+    public Posicao getPosicao() {
+        return Posicao.of(latitude, longitude);
+    }
+
+    public void setPosicao(Posicao posicao) {
+        this.latitude = posicao.getLatitude();
+        this.longitude = posicao.getLongitude();
     }
 
 }

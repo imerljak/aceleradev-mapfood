@@ -29,5 +29,5 @@ public class MotoboyController {
     public Optional<MotoboyDTO> getMotoboysPorId(@PathVariable Long id) {
         return service.buscaPorId(id);
     }
-    
+
 }
