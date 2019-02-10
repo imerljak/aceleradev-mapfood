@@ -14,4 +14,5 @@ public class CoordinateFactory {
     public Coordinate getInstance(LatLng latLng) {
         return getInstance(latLng.lat, latLng.lng);
     }
+
 }

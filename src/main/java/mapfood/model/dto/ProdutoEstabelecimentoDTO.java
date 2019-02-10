@@ -65,4 +65,5 @@ public class ProdutoEstabelecimentoDTO {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
 }

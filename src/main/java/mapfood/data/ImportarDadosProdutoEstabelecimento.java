@@ -25,7 +25,6 @@ public class ImportarDadosProdutoEstabelecimento implements ImportadorDeDados {
         this.leitorDeCsv = leitorDeCsv;
     }
 
-
     @Override
     public void importar() {
         if (repository.count() == 0) {
@@ -40,4 +39,5 @@ public class ImportarDadosProdutoEstabelecimento implements ImportadorDeDados {
             repository.saveAll(produtos);
         }
     }
+
 }

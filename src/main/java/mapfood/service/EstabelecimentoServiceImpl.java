@@ -25,4 +25,5 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
     public List<Estabelecimento> findAll() {
         return repository.findAll();
     }
+
 }

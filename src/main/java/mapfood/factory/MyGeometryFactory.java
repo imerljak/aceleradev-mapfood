@@ -18,7 +18,6 @@ public final class MyGeometryFactory {
     public Geometry createCircle(Coordinate center, Double radius) {
 
         Point point = pointFactory.fromCoordinate(center);
-        
 
         shapeFactory.setNumPoints(100);
         shapeFactory.setCentre(center);

@@ -22,4 +22,5 @@ public final class PointFactory {
     public Point fromCoordinate(Coordinate coordinate) {
         return FACTORY.createPoint(coordinate);
     }
+    
 }

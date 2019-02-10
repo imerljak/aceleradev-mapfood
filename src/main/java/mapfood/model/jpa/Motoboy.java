@@ -32,4 +32,5 @@ public class Motoboy {
     public void setPosicao(Point posicao) {
         this.posicao = posicao;
     }
+
 }
