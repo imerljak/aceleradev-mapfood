@@ -1,5 +1,7 @@
 package mapfood.model.dto;
 
+import mapfood.model.jpa.Posicao;
+
 public class ClienteDTO {
 
     private Long id;
@@ -16,20 +18,13 @@ public class ClienteDTO {
         this.id = id;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Posicao getPosicao() {
+        return Posicao.of(latitude, longitude);
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setPosicao(Posicao posicao) {
+        this.latitude = posicao.getLatitude();
+        this.longitude = posicao.getLongitude();
     }
 
 }

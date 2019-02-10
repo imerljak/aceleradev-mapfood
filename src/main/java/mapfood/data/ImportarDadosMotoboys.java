@@ -1,8 +1,6 @@
 package mapfood.data;
 
 import mapfood.csv.LeitorDeCsv;
-import mapfood.factory.MotoboyFactory;
-import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
 import mapfood.repository.sql.MotoboyRepository;
 import org.slf4j.Logger;
@@ -31,9 +29,8 @@ public class ImportarDadosMotoboys implements ImportadorDeDados {
             logger.info("Iniciando importação de dados.");
 
             List<Motoboy> motoboys = leitorDeCsv
-                    .lerDados(MotoboyDTO.class, "/csv/motoboys.csv")
+                    .lerDados(Motoboy.class, "/csv/motoboys.csv")
                     .parallelStream()
-                    .map(MotoboyFactory::getInstance)
                     .collect(Collectors.toList());
 
             repository.saveAll(motoboys);

@@ -1,6 +1,7 @@
 package mapfood.service;
 
 import mapfood.model.dto.MotoboyDTO;
+import mapfood.model.jpa.Posicao;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +19,11 @@ public interface MotoboyService {
      * Retorna uma lista contendo todos os motoboys por proximidade detro de do raioEmKm
      * ordenados por distancia crescente.
      *
-     * @param latitude  latitude inicial
-     * @param longitude longitude inicial
-     * @param raioEmKm  raio em kms para considerar a pesquisa.
+     * @param posicao  posicao inicial
+     * @param raioEmKm raio em kms para considerar a pesquisa.
      * @return lista de motoboys ordenada pela distancia relativa a lat/long informada.
      */
-    List<MotoboyDTO> buscaPorAproximacao(Double latitude, Double longitude, Double raioEmKm);
+    Optional<MotoboyDTO> buscaMaisProximo(Posicao posicao, Double raioEmKm);
 
     /**
      * Busca um motoboy pelo seu id e retorna um {@link Optional} contendo o motoboy ou não, caso não exista.

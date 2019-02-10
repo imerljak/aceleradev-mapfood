@@ -1,14 +1,13 @@
 package mapfood.service;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import mapfood.factory.CoordinateFactory;
 import mapfood.factory.MotoboyFactory;
-import mapfood.factory.MyGeometryFactory;
 import mapfood.model.dto.MotoboyDTO;
+import mapfood.model.jpa.Posicao;
 import mapfood.repository.sql.MotoboyRepository;
-import mapfood.spatial.CoordinateComparator;
+import mapfood.utils.GeoUtils;
+import mapfood.utils.PosicaoComparator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class MotoboyServiceImpl implements MotoboyService {
-
-    private final CoordinateFactory coordinateFactory = new CoordinateFactory();
-    private final MyGeometryFactory geometryFactory = new MyGeometryFactory();
 
     private final MotoboyRepository repository;
 
@@ -29,24 +25,23 @@ public class MotoboyServiceImpl implements MotoboyService {
     @Override
     public List<MotoboyDTO> buscaTodos() {
         return repository.findAll()
-                .stream()
+                .parallelStream()
                 .map(MotoboyFactory::getInstance)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<MotoboyDTO> buscaPorAproximacao(Double latitude, Double longitude, Double raioEmKm) {
+    @Transactional
+    public Optional<MotoboyDTO> buscaMaisProximo(Posicao posicao, Double raioEmKm) {
+        PosicaoComparator comparator = new PosicaoComparator(posicao);
 
-        Coordinate coordinate = coordinateFactory.getInstance(latitude, longitude);
-        Geometry geometry = geometryFactory.createCircle(coordinate, raioEmKm);
+        // TODO: Melhorar essa consulta.
+        return repository.streamAll()
+                .parallel()
+                .filter(motoboy -> GeoUtils.haversineDistance(posicao, motoboy.getPosicao()) < raioEmKm)
+                .min(comparator.getMotoboyComparator())
+                .map(MotoboyFactory::getInstance);
 
-        CoordinateComparator coordinateComparator = new CoordinateComparator(coordinate);
-
-        return repository.findByPosicaoIsWithin(geometry)
-                .stream()
-                .sorted(coordinateComparator.getMotoboyComparator())
-                .map(MotoboyFactory::getInstance)
-                .collect(Collectors.toList());
     }
 
     @Override

@@ -1,10 +1,10 @@
 package mapfood.data;
 
 import mapfood.csv.LeitorDeCsv;
-import mapfood.model.dto.ClienteDTO;
-import mapfood.model.dto.EstabelecimentoDTO;
-import mapfood.model.dto.MotoboyDTO;
-import mapfood.model.dto.ProdutoEstabelecimentoDTO;
+import mapfood.model.jpa.Cliente;
+import mapfood.model.jpa.Motoboy;
+import mapfood.model.mongodb.Estabelecimento;
+import mapfood.model.mongodb.ProdutoEstabelecimento;
 import mapfood.repository.ProdutoEstabelecimentoRepository;
 import mapfood.repository.no_sql.EstabelecimentoRepository;
 import mapfood.repository.sql.ClienteRepository;
@@ -42,25 +42,25 @@ public class ImportadoresDeDadosParamerizedTest {
 
                 {
                         ImportarDadosClientes.class,
-                        ClienteDTO.class,
+                        Cliente.class,
                         ClienteRepository.class,
                         "/csv/clientes.csv"
                 },
                 {
                         ImportarDadosMotoboys.class,
-                        MotoboyDTO.class,
+                        Motoboy.class,
                         MotoboyRepository.class,
                         "/csv/motoboys.csv"
                 },
                 {
                         ImportarDadosEstabelecimentos.class,
-                        EstabelecimentoDTO.class,
+                        Estabelecimento.class,
                         EstabelecimentoRepository.class,
                         "/csv/estabelecimento-por-municipio.csv"
                 },
                 {
                         ImportarDadosProdutoEstabelecimento.class,
-                        ProdutoEstabelecimentoDTO.class,
+                        ProdutoEstabelecimento.class,
                         ProdutoEstabelecimentoRepository.class,
                         "/csv/produtos-por-estabelecimento.csv"
                 },

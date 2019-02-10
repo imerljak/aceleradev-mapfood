@@ -1,6 +1,6 @@
 package mapfood.csv;
 
-import mapfood.model.dto.ClienteDTO;
+import mapfood.model.jpa.Cliente;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -12,13 +12,13 @@ public class LeitorDeCsvTest {
     public void deveRetornarFalseSeCaminhoArquivoEstiverCerto() {
         LeitorDeCsv leitor = new LeitorDeCsv();
 
-        assertFalse(leitor.lerDados(ClienteDTO.class, "/csv/clientes.csv").isEmpty());
+        assertFalse(leitor.lerDados(Cliente.class, "/csv/clientes.csv").isEmpty());
     }
 
     @Test
     public void deveRetornarTrueSeCaminhoArquivoEstiverErrado() {
         LeitorDeCsv leitor = new LeitorDeCsv();
 
-        assertTrue(leitor.lerDados(ClienteDTO.class, "/resources/clientes.csv").isEmpty());
+        assertTrue(leitor.lerDados(Cliente.class, "/resources/clientes.csv").isEmpty());
     }
 }

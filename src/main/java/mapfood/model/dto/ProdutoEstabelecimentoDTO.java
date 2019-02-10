@@ -2,21 +2,12 @@ package mapfood.model.dto;
 
 public class ProdutoEstabelecimentoDTO {
 
-    private String id;
     private String descricao;
     private String idEstabelecimento;
     private String nomeEstabelecimento;
     private String classificacao;
     private Double precoUnitario;
     private String cidade;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getDescricao() {
         return descricao;

@@ -22,7 +22,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public List<ClienteDTO> buscaTodos() {
         return repository.findAll()
-                .stream()
+                .parallelStream()
                 .map(ClienteFactory::getInstance)
                 .collect(Collectors.toList());
     }

@@ -32,7 +32,6 @@ public class ImportacaoDeDadosChainEventListenerTest {
         ContextRefreshedEvent event = new ContextRefreshedEvent(context);
         publisher.publishEvent(event);
 
-
         verify(chain, atLeastOnce()).onApplicationEvent(event);
     }
 

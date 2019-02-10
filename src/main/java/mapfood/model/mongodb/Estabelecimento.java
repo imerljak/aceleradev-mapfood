@@ -1,6 +1,8 @@
 package mapfood.model.mongodb;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import mapfood.model.jpa.Posicao;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,8 +16,10 @@ public class Estabelecimento {
 
     private String cidade;
 
+    @JsonProperty
     private Double latitude;
 
+    @JsonProperty
     private Double longitude;
 
     private String tipoDeComida;
@@ -44,28 +48,21 @@ public class Estabelecimento {
         this.cidade = cidade;
     }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
     public String getTipoDeComida() {
         return tipoDeComida;
     }
 
     public void setTipoDeComida(String tipoDeComida) {
         this.tipoDeComida = tipoDeComida;
+    }
+
+    public Posicao getPosicao() {
+        return Posicao.of(latitude, longitude);
+    }
+
+    public void setPosicao(Posicao posicao) {
+        this.latitude = posicao.getLatitude();
+        this.longitude = posicao.getLongitude();
     }
 
 }
