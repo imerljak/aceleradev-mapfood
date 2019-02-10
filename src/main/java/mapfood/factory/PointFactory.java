@@ -19,8 +19,4 @@ public final class PointFactory {
         return fromLatLong(latLng.lat, latLng.lng);
     }
 
-    public Point fromCoordinate(Coordinate coordinate) {
-        return FACTORY.createPoint(coordinate);
-    }
-    
 }

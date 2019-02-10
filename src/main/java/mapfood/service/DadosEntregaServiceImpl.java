@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DadosEntregaServiceImpl implements DadosEntregaService {
@@ -18,8 +17,13 @@ public class DadosEntregaServiceImpl implements DadosEntregaService {
     }
 
     @Override
-    public List<DadosEntrega> buscaPorIdAndAfterData(String id, int days) {
+    public List<DadosEntrega> buscaRelatorioEntregas(String id, int days) {
         LocalDate primeiroDia = LocalDate.now().minusDays(days);
         return repository.findAllByIdEqualsAndDataSolicitacaoAfter(id, primeiroDia);
+    }
+
+    @Override
+    public void salvar(DadosEntrega dadosEntrega) {
+        repository.save(dadosEntrega);
     }
 }

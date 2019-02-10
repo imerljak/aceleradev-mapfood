@@ -1,16 +1,14 @@
 package mapfood.service;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import mapfood.factory.CoordinateFactory;
+import com.vividsolutions.jts.geom.Point;
 import mapfood.factory.MotoboyFactory;
-import mapfood.factory.MyGeometryFactory;
+import mapfood.factory.PointFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.repository.sql.MotoboyRepository;
+import mapfood.spatial.CoordinateComparator;
 import mapfood.spatial.GeoUtils;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class MotoboyServiceImpl implements MotoboyService {
-
-    private final CoordinateFactory coordinateFactory = new CoordinateFactory();
-    private final GeometryFactory geometryFactory = new GeometryFactory();
 
     private final MotoboyRepository repository;
 
@@ -37,21 +32,20 @@ public class MotoboyServiceImpl implements MotoboyService {
     }
 
     @Override
+    @Transactional
     public Optional<MotoboyDTO> buscaMaisProximo(Double latitude, Double longitude, Double raioEmKm) {
 
-        Coordinate coordinate = coordinateFactory.getInstance(latitude, longitude);
+        Point pontoOrigem = new PointFactory().fromLatLong(latitude, longitude);
 
-        final Double raioEmMetros = raioEmKm * 1000;
-        final Double raioEmGraus = GeoUtils.metersToDegrees(raioEmMetros);
+        CoordinateComparator comparator = new CoordinateComparator(pontoOrigem.getCoordinate());
 
-        Geometry centro = geometryFactory.createPoint(coordinate);
-        Geometry area = new MyGeometryFactory().createCircle(coordinate, raioEmGraus);
+        // TODO: Melhorar essa consulta.
+        return repository.streamAll()
+                .parallel()
+                .filter(motoboy -> GeoUtils.haversineDistance(pontoOrigem, motoboy.getPosicao()) < raioEmKm)
+                .min(comparator.getMotoboyComparator())
+                .map(MotoboyFactory::getInstance);
 
-        return repository
-                .buscarMaisProximo(area, centro, PageRequest.of(0, 1))
-                .stream()
-                .map(MotoboyFactory::getInstance)
-                .findFirst();
     }
 
     @Override

@@ -1,15 +1,16 @@
 package mapfood.model.dto;
 
-public class SaidaDTO {
+public class ResultadoRota {
 
     private Long idMotoboy;
+    private String idEstabelecimento;
     private double consumoCombustivel;
     private double distanciaEmMetros;
-    private double duracaoEmSegundos;
+    private Long duracaoEmSegundos;
     private Long[] idClientes;
     private Object rota; // qual objeto??
 
-    public SaidaDTO() {
+    public ResultadoRota() {
     }
 
     public Long getIdMotoboy() {
@@ -20,11 +21,11 @@ public class SaidaDTO {
         this.idMotoboy = idMotoboy;
     }
 
-    public double getDuracaoEmSegundos() {
+    public Long getDuracaoEmSegundos() {
         return duracaoEmSegundos;
     }
 
-    public void setDuracaoEmSegundos(double duracaoEmSegundos) {
+    public void setDuracaoEmSegundos(Long duracaoEmSegundos) {
         this.duracaoEmSegundos = duracaoEmSegundos;
     }
 
@@ -58,5 +59,13 @@ public class SaidaDTO {
 
     public void setRota(Object rota) {
         this.rota = rota;
+    }
+
+    public String getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(String idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 }
