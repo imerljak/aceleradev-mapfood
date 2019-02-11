@@ -32,14 +32,15 @@ public class GeoUtils {
      * @return d
      */
     private static double haversineDistance(double latA, double lngA, double latB, double lngB) {
-        double dLat = Math.toRadians((latB - latA));
-        double dLng = Math.toRadians((lngB - lngA));
 
-        latA = Math.toRadians(latA);
-        latB = Math.toRadians(latB);
+        final double dLat = Math.toRadians((latB - latA));
+        final double dLng = Math.toRadians((lngB - lngA));
 
-        double a = haversine(dLat) + Math.cos(latA) * Math.cos(latB) * haversine(dLng);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        final double latARadians = Math.toRadians(latA);
+        final double latBRadians = Math.toRadians(latB);
+
+        final double a = haversine(dLat) + Math.cos(latARadians) * Math.cos(latBRadians) * haversine(dLng);
+        final double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return EARTH_RADIUS * c;
     }
