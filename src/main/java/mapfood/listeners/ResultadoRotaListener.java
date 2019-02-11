@@ -7,7 +7,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Component
 public class ResultadoRotaListener {
@@ -23,7 +23,7 @@ public class ResultadoRotaListener {
     public void handleResultadoRota(ResultadoRota resultadoRota) {
         final DadosEntrega dadosEntrega = new DadosEntrega();
         dadosEntrega.setIdEstabelecimento(resultadoRota.getIdEstabelecimento());
-        dadosEntrega.setDataSolicitacao(LocalDate.now());
+        dadosEntrega.setDataSolicitacao(Instant.now());
         dadosEntrega.setDistanciaEmMetros(resultadoRota.getDistanciaEmMetros());
         dadosEntrega.setDuracaoEmSegundos(resultadoRota.getDuracaoEmSegundos());
 

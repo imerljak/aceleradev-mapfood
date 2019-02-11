@@ -10,9 +10,6 @@ public class ResultadoRota {
     private Long[] idClientes;
     private Rota rota;
 
-    public ResultadoRota() {
-    }
-
     public Long getIdMotoboy() {
         return idMotoboy;
     }
