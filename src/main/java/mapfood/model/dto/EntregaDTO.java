@@ -1,27 +1,16 @@
-package mapfood.model.mongodb;
+package mapfood.model.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
-@Document("dados_entregas")
-public class DadosEntrega {
+public class EntregaDTO {
 
-    @Id
-    private String id;
+    @JsonIgnore
     private String idEstabelecimento;
-    private LocalDate dataSolicitacao;
+    private Instant dataSolicitacao;
     private Double distanciaEmMetros;
     private Long duracaoEmSegundos;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getIdEstabelecimento() {
         return idEstabelecimento;
@@ -31,11 +20,11 @@ public class DadosEntrega {
         this.idEstabelecimento = idEstabelecimento;
     }
 
-    public LocalDate getDataSolicitacao() {
+    public Instant getDataSolicitacao() {
         return dataSolicitacao;
     }
 
-    public void setDataSolicitacao(LocalDate dataSolicitacao) {
+    public void setDataSolicitacao(Instant dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 

@@ -1,26 +1,25 @@
 package mapfood.controller;
 
-import mapfood.model.mongodb.DadosEntrega;
-import mapfood.service.DadosEntregaService;
+import mapfood.service.RelatorioEntregasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("v1")
 public class RelatorioEntregasController {
 
-    private final DadosEntregaService service;
+    private final RelatorioEntregasService service;
 
     @Autowired
-    public RelatorioEntregasController(DadosEntregaService service) {
+    public RelatorioEntregasController(RelatorioEntregasService service) {
         this.service = service;
     }
 
-    @GetMapping(value = "/relatorio/{id}", params = "dias")
-    public List<DadosEntrega> getRelatorio(@PathVariable("id") String idEstabelecimento, @RequestParam("dias") int dias) {
-        return service.buscaRelatorioEntregas(idEstabelecimento, dias);
+    @GetMapping(value = "/relatorio/{id}")
+    public ResponseEntity<?> getRelatorio(@PathVariable("id") String idEstabelecimento,
+                                          @RequestParam(value = "dias", defaultValue = "30", required = false) int dias) {
+        return ResponseEntity.ok(service.getRelatorioEntregas(idEstabelecimento, dias));
     }
 
 

@@ -1,13 +1,20 @@
 package mapfood.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({
+        "idMotoboy",
+        "idEstabelecimento",
+        "consumoCombustivel",
+        "distanciaEmMetros",
+        "duracaoEmSegundos",
+        "rota",
+})
 public class ResultadoRota {
 
     private Long idMotoboy;
     private String idEstabelecimento;
     private double consumoCombustivel;
-    private double distanciaEmMetros;
-    private Long duracaoEmSegundos;
-    private Long[] idClientes;
     private Rota rota;
 
     public Long getIdMotoboy() {
@@ -18,8 +25,12 @@ public class ResultadoRota {
         this.idMotoboy = idMotoboy;
     }
 
-    public Long getDuracaoEmSegundos() {
-        return duracaoEmSegundos;
+    public String getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(String idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 
     public double getConsumoCombustivel() {
@@ -30,34 +41,27 @@ public class ResultadoRota {
         this.consumoCombustivel = consumoCombustivel;
     }
 
-    public double getDistanciaEmMetros() {
-        return distanciaEmMetros;
-    }
-
-    public Long[] getIdClientes() {
-        return idClientes;
-    }
-
-    public void setIdClientes(Long[] idClientes) {
-        this.idClientes = idClientes;
-    }
-
-    public Object getRota() {
+    public Rota getRota() {
         return rota;
     }
 
     public void setRota(Rota rota) {
         this.rota = rota;
-
-        this.distanciaEmMetros = rota.getDistanciaTotal();
-        this.duracaoEmSegundos = rota.getDurataoTotalEmSegundos();
     }
 
-    public String getIdEstabelecimento() {
-        return idEstabelecimento;
+    public double getDistanciaEmMetros() {
+        if (rota != null) {
+            return rota.getDistanciaTotal();
+        }
+
+        return 0D;
     }
 
-    public void setIdEstabelecimento(String idEstabelecimento) {
-        this.idEstabelecimento = idEstabelecimento;
+    public Long getDuracaoEmSegundos() {
+        if (rota != null) {
+            return rota.getDurataoTotalEmSegundos();
+        }
+
+        return 0L;
     }
 }

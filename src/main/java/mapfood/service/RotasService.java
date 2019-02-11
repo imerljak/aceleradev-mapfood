@@ -11,7 +11,7 @@ public interface RotasService {
      * Retorna dados com a melhor roda para a solicitação de entrega informada.
      *
      * @param solicitacaoEntrega solicitacao de entrega para calcular rota.
-     * @return Lista de RotaEntrega
+     * @return Lista de {@link ResultadoRota}
      */
     CompletableFuture<ResultadoRota> getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega);
 
