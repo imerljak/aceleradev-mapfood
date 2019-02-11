@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/cliente")
@@ -26,7 +25,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public Optional<ClienteDTO> getClientesPorId(@PathVariable Long id) {
+    public ClienteDTO getClientesPorId(@PathVariable Long id) {
         return service.buscaPorId(id);
     }
 

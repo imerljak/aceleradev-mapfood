@@ -3,7 +3,6 @@ package mapfood.model.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonPropertyOrder({
@@ -17,10 +16,11 @@ public class RelatorioEntrega {
     private final String idEstabelecimento;
 
     @JsonProperty("entregasNoPeriodo")
-    private List<EntregaDTO> entregas = new ArrayList<>();
+    private final List<EntregaDTO> entregas;
 
-    public RelatorioEntrega(String idEstabelecimento) {
+    public RelatorioEntrega(String idEstabelecimento, List<EntregaDTO> entregas) {
         this.idEstabelecimento = idEstabelecimento;
+        this.entregas = entregas;
     }
 
 
@@ -46,9 +46,5 @@ public class RelatorioEntrega {
 
     public List<EntregaDTO> getEntregas() {
         return entregas;
-    }
-
-    public void setEntregas(List<EntregaDTO> entregas) {
-        this.entregas = entregas;
     }
 }

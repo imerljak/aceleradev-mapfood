@@ -2,7 +2,12 @@ package mapfood.model.dto;
 
 import mapfood.model.jpa.Posicao;
 
-public class ClienteDTO {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class ClienteDTO implements Serializable {
+
+    private static final long serialVersionUID = 5206501363808649896L;
 
     private Long id;
 
@@ -27,4 +32,16 @@ public class ClienteDTO {
         this.longitude = posicao.getLongitude();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClienteDTO that = (ClienteDTO) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

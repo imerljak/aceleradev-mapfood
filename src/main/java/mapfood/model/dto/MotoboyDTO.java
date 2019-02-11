@@ -2,7 +2,11 @@ package mapfood.model.dto;
 
 import mapfood.model.jpa.Posicao;
 
-public class MotoboyDTO {
+import java.io.Serializable;
+
+public class MotoboyDTO implements Serializable {
+
+    private static final long serialVersionUID = -7937847395119199318L;
 
     private Long id;
 

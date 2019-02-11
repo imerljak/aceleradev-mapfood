@@ -3,7 +3,6 @@ package mapfood.service;
 import mapfood.model.dto.ClienteDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ClienteService {
 
@@ -19,6 +18,6 @@ public interface ClienteService {
      *
      * @return opcional de cliente
      */
-    Optional<ClienteDTO> buscaPorId(Long id);
+    ClienteDTO buscaPorId(Long id);
 
 }
