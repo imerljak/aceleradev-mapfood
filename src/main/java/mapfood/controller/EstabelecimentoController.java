@@ -3,6 +3,7 @@ package mapfood.controller;
 import mapfood.model.dto.EstabelecimentoDTO;
 import mapfood.service.EstabelecimentoService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class EstabelecimentoController {
     @GetMapping
     public List<EstabelecimentoDTO> getTodosEstabelecimentos() {
         return service.findAll();
+    }
+
+    @GetMapping("{id}")
+    public EstabelecimentoDTO findById(@PathVariable String id) {
+        return service.findById(id);
     }
 }

@@ -1,9 +1,14 @@
 package mapfood.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mapfood.model.jpa.Posicao;
 
-public class EstabelecimentoDTO {
+import java.io.Serializable;
+
+public class EstabelecimentoDTO implements Serializable {
+
+    private static final long serialVersionUID = 4532958488385764452L;
 
     private String nome;
     private String cidade;
@@ -39,6 +44,7 @@ public class EstabelecimentoDTO {
         this.tipoDeComida = tipoDeComida;
     }
 
+    @JsonIgnore
     public Posicao getPosicao() {
         return Posicao.of(latitude, longitude);
     }

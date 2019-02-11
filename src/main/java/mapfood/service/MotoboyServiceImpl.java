@@ -1,20 +1,21 @@
 package mapfood.service;
 
+import mapfood.exceptions.MotoboyNaoEncontradoException;
 import mapfood.factory.MotoboyFactory;
 import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Posicao;
 import mapfood.repository.sql.MotoboyRepository;
-import mapfood.utils.GeoUtils;
-import mapfood.utils.PosicaoComparator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class MotoboyServiceImpl implements MotoboyService {
+
+    private final Logger logger = LoggerFactory.getLogger(MotoboyServiceImpl.class);
 
     private final MotoboyRepository repository;
 
@@ -24,6 +25,8 @@ public class MotoboyServiceImpl implements MotoboyService {
 
     @Override
     public List<MotoboyDTO> buscaTodos() {
+        logger.info("Buscando todos motoboys.");
+
         return repository.findAll()
                 .parallelStream()
                 .map(MotoboyFactory::getInstance)
@@ -31,22 +34,24 @@ public class MotoboyServiceImpl implements MotoboyService {
     }
 
     @Override
-    @Transactional
-    public Optional<MotoboyDTO> buscaMaisProximo(Posicao posicao, Double raioEmKm) {
-        PosicaoComparator comparator = new PosicaoComparator(posicao);
+    public MotoboyDTO buscaMaisProximo(Posicao posicao, Double raioEmKm) {
+        logger.info("Buscando motoboy mais proximo de: {} - no raio (km): {}", posicao, raioEmKm);
 
-        // TODO: Melhorar essa consulta.
-        return repository.streamAll()
-                .parallel()
-                .filter(motoboy -> GeoUtils.haversineDistance(posicao, motoboy.getPosicao()) < raioEmKm)
-                .min(comparator.getMotoboyComparator())
-                .map(MotoboyFactory::getInstance);
-
+        return repository.buscaMaisProximo(posicao.getLatitude(), posicao.getLongitude())
+                .map(MotoboyFactory::getInstance)
+                .orElseThrow(() ->
+                        new MotoboyNaoEncontradoException("Não foi possível encontrar um motoboy na região"));
     }
 
     @Override
-    public Optional<MotoboyDTO> buscaPorId(Long id) {
-        return repository.findById(id).map(MotoboyFactory::getInstance);
+    public MotoboyDTO buscaPorId(Long id) {
+        logger.info("Buscando motoboy por id: {}", id);
+
+        return repository
+                .findById(id)
+                .map(MotoboyFactory::getInstance)
+                .orElseThrow(() ->
+                        new MotoboyNaoEncontradoException("Não foi encontrado nenhum motoboy com este id: " + id));
     }
 
 }

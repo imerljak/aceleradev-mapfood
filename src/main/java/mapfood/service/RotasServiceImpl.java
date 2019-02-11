@@ -1,11 +1,11 @@
 package mapfood.service;
 
 import mapfood.exceptions.ClienteMuitoDistanteException;
-import mapfood.exceptions.ClienteNaoEncontradoException;
-import mapfood.exceptions.EstabelecimentoNaoEncontradoException;
 import mapfood.model.dto.*;
 import mapfood.model.jpa.Posicao;
 import mapfood.rotas.RotaProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class RotasServiceImpl implements RotasService {
 
+    private final Logger logger = LoggerFactory.getLogger(RotasServiceImpl.class);
+
     private final ApplicationEventPublisher publisher;
 
     private final RotaProvider rotaProvider;
@@ -25,7 +27,6 @@ public class RotasServiceImpl implements RotasService {
     private final EstabelecimentoService estabelecimentoService;
     private final ClienteService clienteService;
     private final MotoboyService motoboyService;
-
 
     @Value("${mapfood.valores.consumo-motocicleta}")
     public double cosumoMotocicleta;
@@ -45,24 +46,34 @@ public class RotasServiceImpl implements RotasService {
     @Override
     public CompletableFuture<ResultadoRota> getMelhorRotaPara(SolicitacaoEntrega solicitacaoEntrega) {
 
-        final EstabelecimentoDTO estabelecimentoDTO = estabelecimentoService.findById(solicitacaoEntrega.getIdEstabelecimento())
-                .orElseThrow(() -> new EstabelecimentoNaoEncontradoException(solicitacaoEntrega.getIdEstabelecimento()));
+        logger.info("Buscando melhor rota para solicitação: {}", solicitacaoEntrega);
+
+        final EstabelecimentoDTO estabelecimentoDTO = estabelecimentoService.findById(solicitacaoEntrega.getIdEstabelecimento());
+
+        logger.info("Encontrado estabelecimento: {}", estabelecimentoDTO);
 
         List<ClienteDTO> clientesDosPedidos = getClientesDosPedidos(solicitacaoEntrega.getPedidos());
+
+        logger.info("Clientes recuperados: {}", clientesDosPedidos);
 
         validaTodosClientesDentroDaDistanciaLimite(clientesDosPedidos, estabelecimentoDTO.getPosicao());
 
         final MotoboyDTO motoboyMaisProximo = motoboyService
-                .buscaMaisProximo(estabelecimentoDTO.getPosicao(), limiteKmEntrega)
-                .orElseThrow(RuntimeException::new);
+                .buscaMaisProximo(estabelecimentoDTO.getPosicao(), limiteKmEntrega);
+
+        logger.info("Motoboy mais proximo encontrado: {}", motoboyMaisProximo);
 
         List<Posicao> posicaoDosClientes = clientesDosPedidos
                 .parallelStream()
                 .map(ClienteDTO::getPosicao)
                 .collect(Collectors.toList());
 
+        logger.info("Solicitando rota para API externa.");
         return rotaProvider.getRota(motoboyMaisProximo.getPosicao(), estabelecimentoDTO.getPosicao(), posicaoDosClientes)
                 .thenApply(rota -> {
+
+                    logger.info("Rota retornada, montando ResultadoRota.");
+
                     final ResultadoRota resultadoRota = new ResultadoRota();
                     resultadoRota.setIdEstabelecimento(solicitacaoEntrega.getIdEstabelecimento());
                     resultadoRota.setIdMotoboy(motoboyMaisProximo.getId());
@@ -72,6 +83,8 @@ public class RotasServiceImpl implements RotasService {
                     return resultadoRota;
                 })
                 .thenApply(resultadoRota -> {
+
+                    logger.info("Publicando evento para salvar Pedido.");
                     publisher.publishEvent(resultadoRota);
 
                     return resultadoRota;
@@ -95,7 +108,7 @@ public class RotasServiceImpl implements RotasService {
         return pedidos
                 .stream()
                 .map(Pedido::getIdCliente)
-                .map(idCliente -> clienteService.buscaPorId(idCliente).orElseThrow(() -> new ClienteNaoEncontradoException(idCliente)))
+                .map(clienteService::buscaPorId)
                 .collect(Collectors.toList());
     }
 

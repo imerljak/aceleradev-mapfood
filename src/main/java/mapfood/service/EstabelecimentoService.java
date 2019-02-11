@@ -3,7 +3,6 @@ package mapfood.service;
 import mapfood.model.dto.EstabelecimentoDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EstabelecimentoService {
 
@@ -13,7 +12,7 @@ public interface EstabelecimentoService {
      * @param id id do estabelecimento
      * @return estabelecimento
      */
-    Optional<EstabelecimentoDTO> findById(String id);
+    EstabelecimentoDTO findById(String id);
 
     /**
      * Retorna todos estabelecimentos registrados.

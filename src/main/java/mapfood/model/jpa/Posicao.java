@@ -49,4 +49,12 @@ public class Posicao {
     public int hashCode() {
         return Objects.hash(latitude, longitude);
     }
+
+    @Override
+    public String toString() {
+        return "Posicao{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

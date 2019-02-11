@@ -4,10 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
-@Table(name = "motoboys")
+@Table(name = "motoboys", indexes = {
+        @Index(name = "idx_latLng", columnList = "latitude, longitude")
+})
 @Entity
-public class Motoboy {
+public class Motoboy implements Serializable {
+
+    private static final long serialVersionUID = 7643857411211476277L;
 
     @JsonIgnore
     @Id
@@ -39,4 +45,16 @@ public class Motoboy {
         this.longitude = posicao.getLongitude();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Motoboy motoboy = (Motoboy) o;
+        return id.equals(motoboy.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

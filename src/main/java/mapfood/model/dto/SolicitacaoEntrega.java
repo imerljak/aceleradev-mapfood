@@ -40,4 +40,11 @@ public class SolicitacaoEntrega {
         this.pedidos = pedidos;
     }
 
+    @Override
+    public String toString() {
+        return "SolicitacaoEntrega{" +
+                "idEstabelecimento='" + idEstabelecimento + '\'' +
+                ", pedidos=" + pedidos +
+                '}';
+    }
 }
