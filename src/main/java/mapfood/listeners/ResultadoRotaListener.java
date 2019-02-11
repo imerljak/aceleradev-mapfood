@@ -1,8 +1,8 @@
 package mapfood.listeners;
 
 import mapfood.model.dto.ResultadoRota;
-import mapfood.model.mongodb.DadosEntrega;
-import mapfood.service.DadosEntregaService;
+import mapfood.model.mongodb.Entrega;
+import mapfood.service.RelatorioEntregasService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -12,22 +12,22 @@ import java.time.Instant;
 @Component
 public class ResultadoRotaListener {
 
-    private final DadosEntregaService dadosEntregaService;
+    private final RelatorioEntregasService relatorioEntregasService;
 
-    public ResultadoRotaListener(DadosEntregaService dadosEntregaService) {
-        this.dadosEntregaService = dadosEntregaService;
+    public ResultadoRotaListener(RelatorioEntregasService relatorioEntregasService) {
+        this.relatorioEntregasService = relatorioEntregasService;
     }
 
     @Async
     @EventListener
     public void handleResultadoRota(ResultadoRota resultadoRota) {
-        final DadosEntrega dadosEntrega = new DadosEntrega();
-        dadosEntrega.setIdEstabelecimento(resultadoRota.getIdEstabelecimento());
-        dadosEntrega.setDataSolicitacao(Instant.now());
-        dadosEntrega.setDistanciaEmMetros(resultadoRota.getDistanciaEmMetros());
-        dadosEntrega.setDuracaoEmSegundos(resultadoRota.getDuracaoEmSegundos());
+        final Entrega entrega = new Entrega();
+        entrega.setIdEstabelecimento(resultadoRota.getIdEstabelecimento());
+        entrega.setDataSolicitacao(Instant.now());
+        entrega.setDistanciaEmMetros(resultadoRota.getDistanciaEmMetros());
+        entrega.setDuracaoEmSegundos(resultadoRota.getDuracaoEmSegundos());
 
-        dadosEntregaService.salvar(dadosEntrega);
+        relatorioEntregasService.salvar(entrega);
     }
 
 }

@@ -1,11 +1,16 @@
 package mapfood.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import mapfood.model.jpa.Posicao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonPropertyOrder({
+        "trechos"
+})
 public class Rota {
 
     @JsonProperty
@@ -15,6 +20,7 @@ public class Rota {
         trechos.add(trecho);
     }
 
+    @JsonIgnore
     public long getDistanciaTotal() {
         return trechos
                 .parallelStream()
@@ -22,6 +28,7 @@ public class Rota {
                 .sum();
     }
 
+    @JsonIgnore
     public long getDurataoTotalEmSegundos() {
         return trechos
                 .parallelStream()
@@ -34,6 +41,12 @@ public class Rota {
         return this;
     }
 
+    @JsonPropertyOrder({
+            "distanciaEmMetros",
+            "duracaoEmSegundos",
+            "inicio",
+            "fim",
+    })
     public static class Trecho {
         private long distanciaEmMetros;
         private long duracaoEmSegundos;
