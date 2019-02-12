@@ -1,8 +1,8 @@
 package mapfood.service;
 
+import mapfood.dto.EntregaDTO;
+import mapfood.dto.RelatorioEntrega;
 import mapfood.factory.EntregaFactory;
-import mapfood.model.dto.EntregaDTO;
-import mapfood.model.dto.RelatorioEntrega;
 import mapfood.model.mongodb.Entrega;
 import mapfood.repository.no_sql.EntregaRepository;
 import org.slf4j.Logger;

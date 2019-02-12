@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.ProdutoEstabelecimentoDTO;
+import mapfood.dto.ProdutoEstabelecimentoDTO;
 import mapfood.model.mongodb.ProdutoEstabelecimento;
 
 public final class ProdutoEstabelecimentoFactory {

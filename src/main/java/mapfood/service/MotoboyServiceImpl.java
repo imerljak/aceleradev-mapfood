@@ -1,8 +1,8 @@
 package mapfood.service;
 
+import mapfood.dto.MotoboyDTO;
 import mapfood.exceptions.MotoboyNaoEncontradoException;
 import mapfood.factory.MotoboyFactory;
-import mapfood.model.dto.MotoboyDTO;
 import mapfood.model.jpa.Posicao;
 import mapfood.repository.sql.MotoboyRepository;
 import org.slf4j.Logger;

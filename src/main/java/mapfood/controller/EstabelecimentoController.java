@@ -1,6 +1,6 @@
 package mapfood.controller;
 
-import mapfood.model.dto.EstabelecimentoDTO;
+import mapfood.dto.EstabelecimentoDTO;
 import mapfood.service.EstabelecimentoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

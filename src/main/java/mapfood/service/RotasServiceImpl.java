@@ -1,7 +1,7 @@
 package mapfood.service;
 
+import mapfood.dto.*;
 import mapfood.exceptions.ClienteMuitoDistanteException;
-import mapfood.model.dto.*;
 import mapfood.model.jpa.Posicao;
 import mapfood.rotas.RotaProvider;
 import org.slf4j.Logger;

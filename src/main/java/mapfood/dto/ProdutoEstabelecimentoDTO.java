@@ -1,4 +1,4 @@
-package mapfood.model.dto;
+package mapfood.dto;
 
 public class ProdutoEstabelecimentoDTO {
 

@@ -1,6 +1,6 @@
 package mapfood.exceptions;
 
-import mapfood.model.dto.ClienteDTO;
+import mapfood.dto.ClienteDTO;
 import mapfood.model.jpa.Cliente;
 import org.springframework.http.HttpStatus;
 

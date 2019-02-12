@@ -1,4 +1,4 @@
-package mapfood.model.dto;
+package mapfood.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 

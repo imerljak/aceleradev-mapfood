@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.ClienteDTO;
+import mapfood.dto.ClienteDTO;
 import mapfood.model.jpa.Cliente;
 import mapfood.model.jpa.Posicao;
 import org.junit.Test;

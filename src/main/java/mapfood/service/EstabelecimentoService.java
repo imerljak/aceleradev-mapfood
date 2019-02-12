@@ -1,6 +1,6 @@
 package mapfood.service;
 
-import mapfood.model.dto.EstabelecimentoDTO;
+import mapfood.dto.EstabelecimentoDTO;
 
 import java.util.List;
 

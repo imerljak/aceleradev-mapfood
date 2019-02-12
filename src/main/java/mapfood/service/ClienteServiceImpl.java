@@ -1,8 +1,8 @@
 package mapfood.service;
 
+import mapfood.dto.ClienteDTO;
 import mapfood.exceptions.ClienteNaoEncontradoException;
 import mapfood.factory.ClienteFactory;
-import mapfood.model.dto.ClienteDTO;
 import mapfood.repository.sql.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

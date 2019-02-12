@@ -4,8 +4,8 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.LatLng;
-import mapfood.model.dto.Rota;
-import mapfood.model.dto.Rota.Trecho;
+import mapfood.dto.Rota;
+import mapfood.dto.Rota.Trecho;
 import mapfood.model.jpa.Posicao;
 
 public class RotaMotoboyFactory {

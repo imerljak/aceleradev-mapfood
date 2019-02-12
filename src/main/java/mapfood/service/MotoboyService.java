@@ -1,6 +1,6 @@
 package mapfood.service;
 
-import mapfood.model.dto.MotoboyDTO;
+import mapfood.dto.MotoboyDTO;
 import mapfood.model.jpa.Posicao;
 
 import java.util.List;

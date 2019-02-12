@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.MotoboyDTO;
+import mapfood.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
 
 public final class MotoboyFactory {

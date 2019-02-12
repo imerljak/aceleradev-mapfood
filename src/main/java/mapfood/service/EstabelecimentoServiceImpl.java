@@ -1,8 +1,8 @@
 package mapfood.service;
 
+import mapfood.dto.EstabelecimentoDTO;
 import mapfood.exceptions.EstabelecimentoNaoEncontradoException;
 import mapfood.factory.EstabelecimentoFactory;
-import mapfood.model.dto.EstabelecimentoDTO;
 import mapfood.repository.no_sql.EstabelecimentoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

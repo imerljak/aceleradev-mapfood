@@ -1,6 +1,6 @@
 package mapfood.listeners;
 
-import mapfood.model.dto.ResultadoRota;
+import mapfood.dto.ResultadoRota;
 import mapfood.model.mongodb.Entrega;
 import mapfood.service.RelatorioEntregasService;
 import org.springframework.context.event.EventListener;

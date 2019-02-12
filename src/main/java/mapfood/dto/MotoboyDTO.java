@@ -1,4 +1,4 @@
-package mapfood.model.dto;
+package mapfood.dto;
 
 import mapfood.model.jpa.Posicao;
 
