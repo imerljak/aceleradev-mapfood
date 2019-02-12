@@ -1,7 +1,7 @@
 package mapfood.controller;
 
-import mapfood.model.dto.ResultadoRota;
-import mapfood.model.dto.SolicitacaoEntrega;
+import mapfood.dto.ResultadoRota;
+import mapfood.dto.SolicitacaoEntrega;
 import mapfood.service.RotasService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.EstabelecimentoDTO;
+import mapfood.dto.EstabelecimentoDTO;
 import mapfood.model.jpa.Posicao;
 import mapfood.model.mongodb.Estabelecimento;
 import org.junit.Test;

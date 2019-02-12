@@ -1,6 +1,6 @@
 package mapfood.rotas;
 
-import mapfood.model.dto.Rota;
+import mapfood.dto.Rota;
 import mapfood.model.jpa.Posicao;
 
 import java.util.List;

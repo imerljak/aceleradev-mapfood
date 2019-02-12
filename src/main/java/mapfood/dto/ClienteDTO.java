@@ -1,28 +1,28 @@
-package mapfood.model.dto;
+package mapfood.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import mapfood.model.jpa.Posicao;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonPropertyOrder({
+        "latitude",
+        "longitude"
+})
 public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 5206501363808649896L;
 
-    private Long id;
-
+    @JsonProperty
     private Double latitude;
 
+    @JsonProperty
     private Double longitude;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @JsonIgnore
     public Posicao getPosicao() {
         return Posicao.of(latitude, longitude);
     }
@@ -37,11 +37,12 @@ public class ClienteDTO implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClienteDTO that = (ClienteDTO) o;
-        return id.equals(that.id);
+        return latitude.equals(that.latitude) &&
+                longitude.equals(that.longitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(latitude, longitude);
     }
 }

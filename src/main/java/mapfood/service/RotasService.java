@@ -1,7 +1,7 @@
 package mapfood.service;
 
-import mapfood.model.dto.ResultadoRota;
-import mapfood.model.dto.SolicitacaoEntrega;
+import mapfood.dto.ResultadoRota;
+import mapfood.dto.SolicitacaoEntrega;
 
 import java.util.concurrent.CompletableFuture;
 

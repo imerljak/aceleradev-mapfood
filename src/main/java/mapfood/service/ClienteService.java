@@ -1,6 +1,6 @@
 package mapfood.service;
 
-import mapfood.model.dto.ClienteDTO;
+import mapfood.dto.ClienteDTO;
 
 import java.util.List;
 

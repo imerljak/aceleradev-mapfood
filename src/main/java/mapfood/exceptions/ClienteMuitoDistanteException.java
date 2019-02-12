@@ -1,26 +1,20 @@
 package mapfood.exceptions;
 
-import mapfood.model.dto.ClienteDTO;
-import mapfood.model.jpa.Cliente;
 import org.springframework.http.HttpStatus;
 
 public class ClienteMuitoDistanteException extends BusinessException {
 
     private static final long serialVersionUID = -8036503715196979663L;
 
-    private Long idCliente;
+    private Double distancia;
 
-    public ClienteMuitoDistanteException(Cliente cliente) {
-        idCliente = cliente.getId();
-    }
-
-    public ClienteMuitoDistanteException(ClienteDTO clienteDTO) {
-        idCliente = clienteDTO.getId();
+    public ClienteMuitoDistanteException(Double distancia) {
+        this.distancia = distancia;
     }
 
     @Override
     public String getMensagemErro() {
-        return String.format("Cliente não encontrado: %d", idCliente);
+        return String.format("Cliente muito distante: %.2f", distancia);
     }
 
     @Override

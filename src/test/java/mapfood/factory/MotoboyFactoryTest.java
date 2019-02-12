@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.MotoboyDTO;
+import mapfood.dto.MotoboyDTO;
 import mapfood.model.jpa.Motoboy;
 import mapfood.model.jpa.Posicao;
 import org.junit.Test;

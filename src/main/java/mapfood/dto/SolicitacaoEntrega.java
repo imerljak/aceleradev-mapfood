@@ -1,4 +1,4 @@
-package mapfood.model.dto;
+package mapfood.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;

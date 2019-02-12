@@ -1,7 +1,7 @@
 package mapfood.service;
 
+import mapfood.dto.*;
 import mapfood.exceptions.ClienteMuitoDistanteException;
-import mapfood.model.dto.*;
 import mapfood.model.jpa.Posicao;
 import mapfood.rotas.RotaProvider;
 import org.slf4j.Logger;
@@ -98,7 +98,7 @@ public class RotasServiceImpl implements RotasService {
                     double distanciaEmKilometros = posicaoDeOrigem.distancia(cliente.getPosicao());
 
                     if (distanciaEmKilometros > limiteKmEntrega) {
-                        throw new ClienteMuitoDistanteException(cliente);
+                        throw new ClienteMuitoDistanteException(distanciaEmKilometros);
                     }
                 });
     }

@@ -1,6 +1,6 @@
 package mapfood.factory;
 
-import mapfood.model.dto.EntregaDTO;
+import mapfood.dto.EntregaDTO;
 import mapfood.model.mongodb.Entrega;
 
 public class EntregaFactory {
