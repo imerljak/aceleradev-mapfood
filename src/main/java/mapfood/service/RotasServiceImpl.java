@@ -98,7 +98,7 @@ public class RotasServiceImpl implements RotasService {
                     double distanciaEmKilometros = posicaoDeOrigem.distancia(cliente.getPosicao());
 
                     if (distanciaEmKilometros > limiteKmEntrega) {
-                        throw new ClienteMuitoDistanteException(cliente);
+                        throw new ClienteMuitoDistanteException(distanciaEmKilometros);
                     }
                 });
     }

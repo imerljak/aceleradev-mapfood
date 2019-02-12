@@ -36,7 +36,7 @@ public class ClienteServiceImplTest {
         when(repository.findById(1L)).thenReturn(newCLiente(1L));
         final ClienteDTO dto = clienteService.buscaPorId(1L);
 
-        assertEquals(new Long(1L), dto.getId());
+        assertEquals(Posicao.of(-1D, 1D), dto.getPosicao());
     }
 
     private Optional<Cliente> newCLiente(Long id) {
