@@ -29,13 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MotoboyControllerTest {
 
     @MockBean
-    private MotoboyRepository repository;
+    public MotoboyRepository repository;
 
     @MockBean
-    private MotoboyService service;
+    public MotoboyService service;
 
     @Autowired
-    private MockMvc mockMvc;
+    public MockMvc mockMvc;
 
     @Test
     public void deveRetornarListaDeClientes() throws Exception {

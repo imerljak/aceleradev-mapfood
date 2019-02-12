@@ -29,13 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ClienteControllerTest {
 
     @MockBean
-    private ClienteRepository repository;
+    public ClienteRepository repository;
 
     @MockBean
-    private ClienteService service;
+    public ClienteService service;
 
     @Autowired
-    private MockMvc mockMvc;
+    public MockMvc mockMvc;
 
     @Test
     public void deveRetornarListaDeClientes() throws Exception {

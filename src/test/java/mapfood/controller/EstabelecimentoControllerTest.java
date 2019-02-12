@@ -29,13 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EstabelecimentoControllerTest {
 
     @MockBean
-    private EstabelecimentoRepository repository;
+    public EstabelecimentoRepository repository;
 
     @MockBean
-    private EstabelecimentoService service;
+    public EstabelecimentoService service;
 
     @Autowired
-    private MockMvc mockMvc;
+    public MockMvc mockMvc;
 
     @Test
     public void deveRetornarTodosEstabelecimentos() throws Exception {
