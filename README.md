@@ -13,7 +13,7 @@ Esta implementação utiliza `PostgreSQL` e `MongoDB` como solução de base de 
 
 É feita uma pesquisa nas localizações dos motoboys na base de dados e retorna-se o mais próximo para atender utilizando a função de Haversine nas distancias para calcular a menor. A API Google directions então calcula e otimiza as melhores rotas para fazer o trajeto.
 
-Como os dados existentes para a `API` possuem informações espaciais, agora pesquisa direto na base com uma função q calcula distância.fórmula de Haversine
+Para efetuar o calculo de distância entre os recursos (motoboys, clientes, estabelecimentos) é utilizado uma implementação da [Formula de Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine) que fornece a distância entre dois pontos em uma esfera (Esfera ~= Terra).
 
 
 ## Configurando o Ambiente.
@@ -22,8 +22,7 @@ Para o funcionamento pleno deste projeto em seu ambiente é necessário ter inst
 * PostgreSQL
 * MongoDB
 
-Para o calculo correto da distância dos motoboys na consulta do motoboy mais proximo é usado uma função que implementa a ![Fórmula de Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine).
-Então é necessário executar o script `haversine.sql` que está dentro da pasta `/resouces/` na base de dados para registrar a função a ser utilizada.
+Para o calculo correto da distância dos motoboys na consulta do motoboy mais proximo é usado uma função que implementa a [Formula de Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine). O Postgres não disponibiliza essa função nativamente, então é necessário executar o script `haversine.sql` que está dentro da pasta `/resouces/` na base de dados para registrar a função e ser capaz de utilizá-la.
 
 ---
 
@@ -54,13 +53,13 @@ Para o projeto MapFood, é necessário que as squads se utilizem dos aprendizado
 
 ## Definições do sistema MapFood
 
-- Um motoboy pode levar no máximo 5 pedidos por solicitacaoEntrega independente do número de itens do pedido;
+- Um motoboy pode levar no máximo 5 pedidos por entrega independente do número de itens do pedido;
 - O tempo de preparação de cada pedido é 10 minutos;
 - Consumo motocicleta: 42km/L
-- Entende-se por pedido como uma solicitação de solicitacaoEntrega feita por um usuário, sendo que o mesmo pode conter diversos itens (cachorro quente, batata frita, refrigerante, etc);
-- Para o tempo de solicitacaoEntrega, é importante considerar os seguintes parâmetros:
+- Entende-se por pedido como uma solicitação de entrega feita por um usuário, sendo que o mesmo pode conter diversos itens (cachorro quente, batata frita, refrigerante, etc);
+- Para o tempo de entrega, é importante considerar os seguintes parâmetros:
 	- Deslocamento do motoboy até o estabelecimento;
-	- Deslocamento do motoboy até a solicitacaoEntrega do pedido ao cliente.
+	- Deslocamento do motoboy até a entrega do pedido ao cliente.
 
 ## Casos práticos do sistema
 
@@ -68,7 +67,7 @@ Para facilitar o entendimento da API que deverá ser construída, segue abaixo a
 
 **Dado que** um consumidor selecionou um cachorro quente no estabelecimento X
 **Quando** o pedido for realizado
-**Então** deve-se identificar no sistema qual motoboy deve ser selecionado, qual o respectivo trajeto e informações adicionais do trajeto (ex: quilometragem, tempo de solicitacaoEntrega…);
+**Então** deve-se identificar no sistema qual motoboy deve ser selecionado, qual o respectivo trajeto e informações adicionais do trajeto (ex: quilometragem, tempo de entrega…);
 
 **Dado que** vários pedidos em localizações próximas foram solicitados em um mesmo estabelecimento e em horários próximos
 **Quando** o sistema for selecionar o motoboy e respectiva rota
@@ -80,8 +79,8 @@ Para facilitar o entendimento da API que deverá ser construída, segue abaixo a
 
 ## Informações adicionais
 
-É papel do squad definir quais atributos serão levados em consideração para definir o melhor trajeto. Alguns exemplos são: quilometragem, tempo de solicitacaoEntrega, capacidade de buscar e entregar múltiplos pedidos em uma única rota, etc.
+É papel do squad definir quais atributos serão levados em consideração para definir o melhor trajeto. Alguns exemplos são: quilometragem, tempo de entrega, capacidade de buscar e entregar múltiplos pedidos em uma única rota, etc.
 
-Com exceção dos requisitos técnicos obrigatórios, as funcionalidades e seus atributos podem ser alterados livremente por cada squad, desde que as alterações sejam justificáveis. Exemplos: em tempo de desenvolvimento, nova ideia que facilite o uso pelo usuário, melhorias na geração das rotas de solicitacaoEntrega, etc.
+Com exceção dos requisitos técnicos obrigatórios, as funcionalidades e seus atributos podem ser alterados livremente por cada squad, desde que as alterações sejam justificáveis. Exemplos: em tempo de desenvolvimento, nova ideia que facilite o uso pelo usuário, melhorias na geração das rotas de entrega, etc.
 
 É necessário que apenas uma pessoa do squad faça a submissão dos códigos para que os mentores possam fazer a avaliação.
