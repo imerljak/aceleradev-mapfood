@@ -1,5 +1,7 @@
 # Projeto MapFood
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3534ed9497e345cf9a44c7b81320a996)](https://app.codacy.com/app/aceleradev/aceleradev-mapfood?utm_source=github.com&utm_medium=referral&utm_content=imerljak/aceleradev-mapfood&utm_campaign=Badge_Grade_Dashboard)
+
 
 # Equipe: Mighty Ducks
 ![](https://s3951.pcdn.co/wp-content/uploads/2015/09/Ducks1-532x480.gif)
