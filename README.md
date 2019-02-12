@@ -22,6 +22,8 @@ Para o funcionamento pleno deste projeto em seu ambiente é necessário ter inst
 * PostgreSQL
 * MongoDB
 
+Para o calculo correto da distância dos motoboys na consulta do motoboy mais proximo é usado uma função que implementa a ![Fórmula de Haversine](https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Haversine).
+Então é necessário executar o script `haversine.sql` que está dentro da pasta `/resouces/` na base de dados para registrar a função a ser utilizada.
 
 ---
 
